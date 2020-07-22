@@ -3,13 +3,13 @@ import './App.css';
 
 // eslint-disable-next-line
 import { Table } from './Table';
-import { SearchParameters } from './SearchParameters'
+import { SearchParametersContainer } from './SearchParametersContainer';
 
 
 function App() {
   return (
     <div className="App">
-      <SearchParameters />
+      <SearchParametersContainer />
     </div>
   );
 }

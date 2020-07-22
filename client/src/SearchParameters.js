@@ -1,18 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export const SearchParameters = () => {
+export const SearchParameters = props => {
     return (
-        <form>
-            <input type="text"/>
+        <form onSubmit={props.handleSubmit}>
+            <input type="text" onChange={props.handleTextChange}/>
             <input type="submit" value="Search"/> 
 
             <br /><br />
 
-            <input type="checkbox" value="alch"/>
+            <input type="checkbox" value="alch" onChange={props.handleCheckboxChange}/>
             <label>Alchemist</label>
-            <input type="checkbox" value="antip"/>
+            <input type="checkbox" value="antip" onChange={props.handleCheckboxChange}/>
             <label>Antipaladin</label>
-            <input type="checkbox" value="arc"/>
+            <input type="checkbox" value="arc" onChange={props.handleCheckboxChange}/>
             <label>Arcanist</label>
             <input type="checkbox" value="bard"/>
             <label>Bard</label>
@@ -69,14 +70,14 @@ export const SearchParameters = () => {
 
             <br /><br />
 
-            <input type="checkbox" value="sr"/>
+            <input type="checkbox" value="sr" onChange={props.handleCheckboxChange}/>
             <label>Spell Resistance</label>
 
             <br /><br />
 
-            <input type="checkbox" value="fort"/>
+            <input type="checkbox" value="fort" onChange={props.handleCheckboxChange}/>
             <label>Fortitude Save</label>
-            <input type="checkbox" value="ref"/>
+            <input type="checkbox" value="ref" onChange={props.handleCheckboxChange}/>
             <label>Reflex Save</label>
             <input type="checkbox" value="will"/>
             <label>Will Save</label>
@@ -85,11 +86,11 @@ export const SearchParameters = () => {
             
             <br /><br />
 
-            <input type="checkbox" value="0th"/>
+            <input type="checkbox" value="0th" onChange={props.handleCheckboxChange}/>
             <label>0th</label>
-            <input type="checkbox" value="1st"/>
+            <input type="checkbox" value="1st" onChange={props.handleCheckboxChange}/>
             <label>1st</label>
-            <input type="checkbox" value="2nd"/>
+            <input type="checkbox" value="2nd" onChange={props.handleCheckboxChange}/>
             <label>2nd</label>
             <input type="checkbox" value="3rd"/>
             <label>3rd</label>
@@ -108,3 +109,9 @@ export const SearchParameters = () => {
         </form>
     );
 }
+
+SearchParameters.propTypes = {
+    handleCheckboxChange: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    handleTextChange: PropTypes.func.isRequired
+};

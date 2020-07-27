@@ -3,65 +3,65 @@ import PropTypes from 'prop-types';
 
 export const SearchParameters = props => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <input type="text" onChange={props.handleTextChange}/>
+        <form onSubmit={props.onSubmit}>
+            <input type="text" onChange={props.onTextChange}/>
             <input type="submit" value="Search"/> 
 
             <br /><br />
 
-            <input type="checkbox" value="alch" onChange={props.handleCheckboxChange}/>
+            <input type="checkbox" value="alchemist" onChange={props.onCheckboxChange}/>
             <label>Alchemist</label>
-            <input type="checkbox" value="antip" onChange={props.handleCheckboxChange}/>
+            <input type="checkbox" value="antipaladin" onChange={props.onCheckboxChange}/>
             <label>Antipaladin</label>
-            <input type="checkbox" value="arc" onChange={props.handleCheckboxChange}/>
+            <input type="checkbox" value="arc" onChange={props.onCheckboxChange}/>
             <label>Arcanist</label>
             <input type="checkbox" value="bard"/>
             <label>Bard</label>
-            <input type="checkbox" value="blood"/>
+            <input type="checkbox" value="bloodrager"/>
             <label>Bloodrager</label>
-            <input type="checkbox" value="cler"/>
+            <input type="checkbox" value="cleric"/>
             <label>Cleric</label>
             <input type="checkbox" value="druid"/>
             <label>Druid</label>
-            <input type="checkbox" value="hunt"/>
+            <input type="checkbox" value="hunter"/>
             <label>Hunter</label>
-            <input type="checkbox" value="inqu"/>
+            <input type="checkbox" value="inquisitor"/>
             <label>Inquisitor</label>
 
             <br />
 
-            <input type="checkbox" value="inves"/>
+            <input type="checkbox" value="investigator"/>
             <label>Investigator</label>
             <input type="checkbox" value="magus"/>
             <label>Magus</label>
-            <input type="checkbox" value="med"/>
+            <input type="checkbox" value="spell_medium"/>
             <label>Medium</label>
-            <input type="checkbox" value="mes"/>
+            <input type="checkbox" value="mesmerist"/>
             <label>Mesmerist</label>
-            <input type="checkbox" value="occult"/>
+            <input type="checkbox" value="occultist"/>
             <label>Occultist</label>
-            <input type="checkbox" value="orac"/>
+            <input type="checkbox" value="oracle"/>
             <label>Oracle</label>
-            <input type="checkbox" value="pala"/>
+            <input type="checkbox" value="paladin"/>
             <label>Paladin</label>
-            <input type="checkbox" value="psy"/>
+            <input type="checkbox" value="psychic"/>
             <label>Psychic</label>
-            <input type="checkbox" value="rang"/>
+            <input type="checkbox" value="ranger"/>
             <label>Ranger</label>
 
             <br />
 
-            <input type="checkbox" value="sham"/>
+            <input type="checkbox" value="shaman"/>
             <label>Shaman</label>
-            <input type="checkbox" value="skal"/>
+            <input type="checkbox" value="skald"/>
             <label>Skald</label>
             <input type="checkbox" value="sorc"/>
             <label>Sorcerer</label>
-            <input type="checkbox" value="spir"/>
+            <input type="checkbox" value="spiritualist"/>
             <label>Spiritualist</label>
-            <input type="checkbox" value="summ"/>
+            <input type="checkbox" value="summoner"/>
             <label>Summoner</label>
-            <input type="checkbox" value="usumm"/>
+            <input type="checkbox" value="summoner_unchained"/>
             <label>Summoner (Unchained)</label>
             <input type="checkbox" value="witch"/>
             <label>Witch</label>
@@ -70,14 +70,14 @@ export const SearchParameters = props => {
 
             <br /><br />
 
-            <input type="checkbox" value="sr" onChange={props.handleCheckboxChange}/>
+            <input type="checkbox" value="spell_resistance" onChange={props.onCheckboxChange}/>
             <label>Spell Resistance</label>
 
             <br /><br />
 
-            <input type="checkbox" value="fort" onChange={props.handleCheckboxChange}/>
+            <input type="checkbox" value="fort" onChange={props.onCheckboxChange}/>
             <label>Fortitude Save</label>
-            <input type="checkbox" value="ref" onChange={props.handleCheckboxChange}/>
+            <input type="checkbox" value="ref" onChange={props.onCheckboxChange}/>
             <label>Reflex Save</label>
             <input type="checkbox" value="will"/>
             <label>Will Save</label>
@@ -86,11 +86,11 @@ export const SearchParameters = props => {
             
             <br /><br />
 
-            <input type="checkbox" value="0th" onChange={props.handleCheckboxChange}/>
+            <input type="checkbox" value="0th" onChange={props.onCheckboxChange}/>
             <label>0th</label>
-            <input type="checkbox" value="1st" onChange={props.handleCheckboxChange}/>
+            <input type="checkbox" value="1st" onChange={props.onCheckboxChange}/>
             <label>1st</label>
-            <input type="checkbox" value="2nd" onChange={props.handleCheckboxChange}/>
+            <input type="checkbox" value="2nd" onChange={props.onCheckboxChange}/>
             <label>2nd</label>
             <input type="checkbox" value="3rd"/>
             <label>3rd</label>
@@ -111,7 +111,7 @@ export const SearchParameters = props => {
 }
 
 SearchParameters.propTypes = {
-    handleCheckboxChange: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    handleTextChange: PropTypes.func.isRequired
+    onCheckboxChange: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    onTextChange: PropTypes.func.isRequired
 };

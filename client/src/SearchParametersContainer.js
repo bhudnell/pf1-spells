@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { SearchParameters } from './SearchParameters';
 
 export class SearchParametersContainer extends React.Component {
@@ -28,20 +30,31 @@ export class SearchParametersContainer extends React.Component {
     }
 
     handleSubmit(event) {
-        fetch('http://localhost:5000/api/spells?searchString=sdghaksdg&sorc=true&wiz=false')
-            .then(res => res.json())
-            .then(result => {
-                console.log(result);
-            },
-            error => {
-                console.log(error);
-            });
+        const queryBase = '/api/spellsearch?';
+        let queryParams = '';
+        Object.entries(this.state).forEach(entry => {
+            queryParams.concat(`${entry[0]}=${entry[1]}&`);
+        });
+        const queryString = queryBase + queryParams.slice(0, -1);
+
+        fetch(queryString)
+        .then(res => res.json())
+        .then(result => {
+            console.log(result);
+        },
+        error => {
+            console.log(error);
+        });
     }
 
     render() {
         return <SearchParameters
-            handleCheckboxChange={this.handleCheckboxChange}
-            handleSubmit={this.handleSubmit}
-            handleTextChange={this.handleTextChange} />;
+            onCheckboxChange={this.handleCheckboxChange}
+            onSubmit={this.handleSubmit}
+            onTextChange={this.handleTextChange} />;
     }
 }
+
+SearchParametersContainer.propTypes = {
+    onUpdate: PropTypes.func.isRequired
+};

@@ -1,15 +1,12 @@
 import React from 'react';
 import './App.css';
 
-// eslint-disable-next-line
-import { Table } from './Table';
-import { SearchParametersContainer } from './SearchParametersContainer';
-
+import { Main } from './Main';
 
 function App() {
   return (
     <div className="App">
-      <SearchParametersContainer />
+      <Main />
     </div>
   );
 }

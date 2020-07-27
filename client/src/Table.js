@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export const Table = () => {
+export const Table = props => {
     return (
         <table>
             <tr>
@@ -24,3 +25,7 @@ export const Table = () => {
         </table>
     );
 }
+
+Table.propTypes = {
+    tableData: PropTypes.object.isRequired
+};

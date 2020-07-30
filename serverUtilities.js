@@ -69,7 +69,7 @@ exports.processQuery = url => {
   };
 
   url.searchParams.forEach((value, key) => {  
-    if (key === 'searchString') { // text user is searching for
+    if (key === 'searchString' && value.length > 0) { // text user is searching for
       processObject.searchString = value;
     }
     else if (value === 'true') // only accept true values for now

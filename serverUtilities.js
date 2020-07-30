@@ -52,7 +52,7 @@ const spellLevels = [
 ]
 
 exports.createMySQLConnection = () => {
-  mysql.createConnection({
+  return mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
@@ -90,4 +90,50 @@ exports.processQuery = url => {
   });
 
   return processObject;
+}
+
+exports.createSQLParameters = queryObject => {
+  let SQLParams = ' WHERE';
+
+  let firstCondition = true;
+  Object.entries(queryObject).forEach(entry => {
+    if (entry[1].length > 0) {
+      if (!firstCondition) {
+        SQLParams += ' AND';
+      }
+      firstCondition = false;
+    }
+
+    if (entry[0] === 'searchString') {
+      SQLParams += ` spell_name LIKE '%${entry[1]}%'`
+    }
+    else if (entry[0] === 'spellResistance') {
+      SQLParams += ` spell_resistance LIKE '%${entry[1]}%'`
+    }
+    else if (entry[0] === 'saves') {
+      if (entry[1].length > 0) {
+        SQLParams += ' (';
+
+        let firstSave = true;
+        entry[1].forEach(save => {
+          if (!firstSave) {
+            SQLParams += ' OR';
+          }
+          firstSave = false;
+
+          SQLParams += ` saving_throw LIKE '%${save}%'`
+        });
+
+        SQLParams += ')';
+      }
+    }
+    else if (entry[0] === 'classes') {
+      
+    }
+    else if (entry[0] === 'spellLevels') {
+
+    }
+  });
+
+  return SQLParams;
 }

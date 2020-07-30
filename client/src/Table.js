@@ -1,31 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Table = props => {
-    return (
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Spell Resistance?</th>
-                <th>Save</th> 
-            </tr>
-            <tr>
-                <td>Fireball</td>
-                <td>fireball go boom</td>
-                <td>Yes</td>
-                <td>Reflex</td>
-            </tr>
-            <tr>
-                <td>Chains of light</td>
-                <td>lock'em up... with light!</td>
-                <td>No</td>
-                <td>Reflex</td>
-            </tr>
-        </table>
-    );
+export class Table extends React.Component {
+    getTableContent(arr) {
+        // function to iterate through the tableData to create the table rows
+        const iterateItem = (item) => {
+           return item.map(function (nextItem, j) { // todo figure out the format
+             return (
+                <tr key={nextItem.type}>
+                   <td>{nextItem.type}</td>
+                   <td>{nextItem.count}</td>
+                </tr>
+             );
+           })
+        }
+
+        // create the table itself
+        return arr.map(function (item, i) { // todo figure out the format
+            return (
+                <table key={item.productType}>
+                <thead>{item.productType}</thead>
+                    <tbody>
+                        {iterateItem(item.contents)}
+                    </tbody>
+                </table>
+            );
+        });
+    };
+
+    render() {
+        if (this.props.tableData) {
+            return <div>{this.getTableContent(this.props.tableData)}</div>;
+        }
+        else {            
+            return <div></div>;
+        }
+    }        
 }
 
 Table.propTypes = {
-    tableData: PropTypes.object.isRequired
+    tableData: PropTypes.object
 };

@@ -16,21 +16,14 @@ export class SearchParametersContainer extends React.Component {
 
     handleCheckboxChange(event) {
         this.setState({ [event.target.value]: event.target.checked });
-
-        console.log(event.target);
-        console.log(event.target.value);
-        console.log(event.target.checked);
     }
 
     handleTextChange(event) {
         this.setState({ searchString: event.target.value });
-
-        console.log(event.target);
-        console.log(event.target.value);
     }
 
     handleSubmit(event) {
-        const queryBase = '/api/spellsearch?';
+        const queryBase = '/api/spellsearch?'; // todo dont send if its a blank query
         let queryParams = '';
         Object.entries(this.state).forEach(entry => {
             queryParams += `${entry[0]}=${entry[1]}&`;
@@ -41,6 +34,7 @@ export class SearchParametersContainer extends React.Component {
         .then(res => res.json())
         .then(result => {
             console.log(result);
+            //this.props.onUpdate(result); todo uncomment when table is ready
         },
         error => {
             console.log(error);

@@ -75,13 +75,13 @@ export const SearchParameters = props => {
 
             <br /><br />
 
-            <input type="checkbox" value="fort" onChange={props.onCheckboxChange}/>
+            <input type="checkbox" value="fortitude" onChange={props.onCheckboxChange}/>
             <label>Fortitude Save</label>
-            <input type="checkbox" value="ref" onChange={props.onCheckboxChange}/>
+            <input type="checkbox" value="reflex" onChange={props.onCheckboxChange}/>
             <label>Reflex Save</label>
             <input type="checkbox" value="will" onChange={props.onCheckboxChange}/>
             <label>Will Save</label>
-            <input type="checkbox" value="nosave" onChange={props.onCheckboxChange}/>
+            <input type="checkbox" value="none" onChange={props.onCheckboxChange}/>
             <label>No Save</label>
             
             <br /><br />

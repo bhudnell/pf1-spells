@@ -21,8 +21,8 @@ export class Main extends React.Component {
     render() {
         return (
             <div>
-                <Table tableData={this.state.tableData} />
                 <SearchParametersContainer onUpdate={this.updateTable} />
+                <Table tableData={this.state.tableData} />
             </div>
         );
     }

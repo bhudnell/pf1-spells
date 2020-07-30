@@ -3,7 +3,7 @@ import React from 'react';
 import { Table } from './Table';
 import { SearchParametersContainer } from './SearchParametersContainer';
 
-class Main extends React.Component {
+export class Main extends React.Component {
     constructor(props) {
         super(props);
 
@@ -27,5 +27,3 @@ class Main extends React.Component {
         );
     }
 }
-
-export default Main;

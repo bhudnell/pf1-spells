@@ -33,7 +33,7 @@ export class SearchParametersContainer extends React.Component {
         const queryBase = '/api/spellsearch?';
         let queryParams = '';
         Object.entries(this.state).forEach(entry => {
-            queryParams.concat(`${entry[0]}=${entry[1]}&`);
+            queryParams += `${entry[0]}=${entry[1]}&`;
         });
         const queryString = queryBase + queryParams.slice(0, -1);
 

@@ -2,30 +2,37 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export class Table extends React.Component {
-    getTableContent(arr) {
+    getTableContent(tableData) {
         // function to iterate through the tableData to create the table rows
-        const iterateItem = (item) => {
-           return item.map(function (nextItem, j) { // todo figure out the format
+        const createRows = tableData => {
+           return tableData.map(row => {
              return (
-                <tr key={nextItem.type}>
-                   <td>{nextItem.type}</td>
-                   <td>{nextItem.count}</td>
+                <tr key={row.spell_name}>
+                   <td>{row.spell_name}</td>
+                   <td>{row.spell_level}</td>
+                   <td>{row.short_description}</td>
+                   <td>{row.saving_throw}</td>
+                   <td>{row.spell_resistance}</td>
                 </tr>
              );
            })
         }
 
         // create the table itself
-        return arr.map(function (item, i) { // todo figure out the format
-            return (
-                <table key={item.productType}>
-                <thead>{item.productType}</thead>
-                    <tbody>
-                        {iterateItem(item.contents)}
-                    </tbody>
-                </table>
-            );
-        });
+        return (
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Spell Name</th>
+                        <th>Spell Level</th>
+                        <th>Spell Description</th>
+                        <th>Saving Throw</th>
+                        <th>Spell Resistance</th>
+                    </tr>
+                    {createRows(tableData)}
+                </tbody>
+            </table>
+        );
     };
 
     render() {
@@ -33,11 +40,11 @@ export class Table extends React.Component {
             return <div>{this.getTableContent(this.props.tableData)}</div>;
         }
         else {            
-            return <div></div>;
+            return <></>;
         }
     }        
 }
 
 Table.propTypes = {
-    tableData: PropTypes.object
+    tableData: PropTypes.array
 };

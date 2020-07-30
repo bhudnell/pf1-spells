@@ -2,110 +2,102 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const SearchParameters = props => {
+    const classes = [
+        { value: "alchemist", display: "Alchemist" },
+        { value: "antipaladin", display: "Antipaladin" },
+        { value: "arcanist", display: "Arcanist" },
+        { value: "bard", display: "Bard" },
+        { value: "bloodrager", display: "Bloodrager" },
+        { value: "cleric", display: "Cleric" },
+        { value: "druid", display: "Druid" },
+        { value: "hunter", display: "Hunter" },
+        { value: "inquisitor", display: "Inquisitor" },
+        { value: "investigator", display: "Investigator" },
+        { value: "magus", display: "Magus" },
+        { value: "spell_medium", display: "Medium" },
+        { value: "mesmerist", display: "Mesmerist" },
+        { value: "occultist", display: "Occultist" },
+        { value: "oracle", display: "Oracle" },
+        { value: "paladin", display: "Paladin" },
+        { value: "psychic", display: "Psychic" },
+        { value: "ranger", display: "Ranger" },
+        { value: "shaman", display: "Shaman" },
+        { value: "skald", display: "Skald" },
+        { value: "sorc", display: "Sorcerer" },
+        { value: "spiritualist", display: "Spiritualist" },
+        { value: "summoner", display: "Summoner" },
+        { value: "summoner_unchained", display: "Summoner (Unchained)" },
+        { value: "witch", display: "Witch" },
+        { value: "wiz", display: "Wizard" }
+    ];
+    const saves = [
+        { value: "fortitude", display: "Fortitude Save" },
+        { value: "reflex", display: "Reflex Save" },
+        { value: "will", display: "Will Save" },
+        { value: "none", display: "No Save" }
+    ];
+    const spellLevel = [
+        { value: "0th", display: "0th" },
+        { value: "1st", display: "1st" },
+        { value: "2nd", display: "2nd" },
+        { value: "3rd", display: "3rd" },
+        { value: "4th", display: "4th" },
+        { value: "5th", display: "5th" },
+        { value: "6th", display: "6th" },
+        { value: "7th", display: "7th" },
+        { value: "8th", display: "8th" },
+        { value: "9th", display: "9th" }
+    ];
+    let classElements = classes.map(classElement => { // todo add <br /> somewhere
+        return (
+            <React.Fragment key={classElement.display}>
+                <input
+                    key={classElement.display}                    type="checkbox"
+                    value={classElement.value}
+                    onChange={props.onCheckboxChange}
+                />
+                <label>{classElement.display}</label>
+            </React.Fragment>
+        );
+    });
+    let saveElements = saves.map(saveElement => {
+        return (
+            <React.Fragment key={saveElement.display}>
+                <input
+                    type="checkbox"
+                    value={saveElement.value}
+                    onChange={props.onCheckboxChange}
+                />
+                <label>{saveElement.display}</label>
+            </React.Fragment>
+        );
+    });
+    let levelElements = spellLevel.map(levelElement => {
+        return (
+            <React.Fragment key={levelElement.display}>
+                <input
+                    type="checkbox"
+                    value={levelElement.value}
+                    onChange={props.onCheckboxChange}
+                />
+                <label>{levelElement.display}</label>
+            </React.Fragment>
+        );
+    });
+
     return (
         <form onSubmit={props.onSubmit}>
             <input type="text" onChange={props.onTextChange}/>
             <input type="submit" value="Search"/> 
-
             <br /><br />
-
-            <input type="checkbox" value="alchemist" onChange={props.onCheckboxChange}/>
-            <label>Alchemist</label>
-            <input type="checkbox" value="antipaladin" onChange={props.onCheckboxChange}/>
-            <label>Antipaladin</label>
-            <input type="checkbox" value="arcanist" onChange={props.onCheckboxChange}/>
-            <label>Arcanist</label>
-            <input type="checkbox" value="bard" onChange={props.onCheckboxChange}/>
-            <label>Bard</label>
-            <input type="checkbox" value="bloodrager" onChange={props.onCheckboxChange}/>
-            <label>Bloodrager</label>
-            <input type="checkbox" value="cleric" onChange={props.onCheckboxChange}/>
-            <label>Cleric</label>
-            <input type="checkbox" value="druid" onChange={props.onCheckboxChange}/>
-            <label>Druid</label>
-            <input type="checkbox" value="hunter" onChange={props.onCheckboxChange}/>
-            <label>Hunter</label>
-            <input type="checkbox" value="inquisitor" onChange={props.onCheckboxChange}/>
-            <label>Inquisitor</label>
-
-            <br />
-
-            <input type="checkbox" value="investigator" onChange={props.onCheckboxChange}/>
-            <label>Investigator</label>
-            <input type="checkbox" value="magus" onChange={props.onCheckboxChange}/>
-            <label>Magus</label>
-            <input type="checkbox" value="spell_medium" onChange={props.onCheckboxChange}/>
-            <label>Medium</label>
-            <input type="checkbox" value="mesmerist" onChange={props.onCheckboxChange}/>
-            <label>Mesmerist</label>
-            <input type="checkbox" value="occultist" onChange={props.onCheckboxChange}/>
-            <label>Occultist</label>
-            <input type="checkbox" value="oracle" onChange={props.onCheckboxChange}/>
-            <label>Oracle</label>
-            <input type="checkbox" value="paladin" onChange={props.onCheckboxChange}/>
-            <label>Paladin</label>
-            <input type="checkbox" value="psychic" onChange={props.onCheckboxChange}/>
-            <label>Psychic</label>
-            <input type="checkbox" value="ranger" onChange={props.onCheckboxChange}/>
-            <label>Ranger</label>
-
-            <br />
-
-            <input type="checkbox" value="shaman" onChange={props.onCheckboxChange}/>
-            <label>Shaman</label>
-            <input type="checkbox" value="skald" onChange={props.onCheckboxChange}/>
-            <label>Skald</label>
-            <input type="checkbox" value="sorc" onChange={props.onCheckboxChange}/>
-            <label>Sorcerer</label>
-            <input type="checkbox" value="spiritualist" onChange={props.onCheckboxChange}/>
-            <label>Spiritualist</label>
-            <input type="checkbox" value="summoner" onChange={props.onCheckboxChange}/>
-            <label>Summoner</label>
-            <input type="checkbox" value="summoner_unchained" onChange={props.onCheckboxChange}/>
-            <label>Summoner (Unchained)</label>
-            <input type="checkbox" value="witch" onChange={props.onCheckboxChange}/>
-            <label>Witch</label>
-            <input type="checkbox" value="wiz" onChange={props.onCheckboxChange}/>
-            <label>Wizard</label>
-
+            {classElements}
             <br /><br />
-
             <input type="checkbox" value="spell_resistance" onChange={props.onCheckboxChange}/>
             <label>Spell Resistance</label>
-
             <br /><br />
-
-            <input type="checkbox" value="fortitude" onChange={props.onCheckboxChange}/>
-            <label>Fortitude Save</label>
-            <input type="checkbox" value="reflex" onChange={props.onCheckboxChange}/>
-            <label>Reflex Save</label>
-            <input type="checkbox" value="will" onChange={props.onCheckboxChange}/>
-            <label>Will Save</label>
-            <input type="checkbox" value="none" onChange={props.onCheckboxChange}/>
-            <label>No Save</label>
-            
+            {saveElements}            
             <br /><br />
-
-            <input type="checkbox" value="0th" onChange={props.onCheckboxChange}/>
-            <label>0th</label>
-            <input type="checkbox" value="1st" onChange={props.onCheckboxChange}/>
-            <label>1st</label>
-            <input type="checkbox" value="2nd" onChange={props.onCheckboxChange}/>
-            <label>2nd</label>
-            <input type="checkbox" value="3rd" onChange={props.onCheckboxChange}/>
-            <label>3rd</label>
-            <input type="checkbox" value="4th" onChange={props.onCheckboxChange}/>
-            <label>4th</label>
-            <input type="checkbox" value="5th" onChange={props.onCheckboxChange}/>
-            <label>5th</label>
-            <input type="checkbox" value="6th" onChange={props.onCheckboxChange}/>
-            <label>6th</label>
-            <input type="checkbox" value="7th" onChange={props.onCheckboxChange}/>
-            <label>7th</label>
-            <input type="checkbox" value="8th" onChange={props.onCheckboxChange}/>
-            <label>8th</label>
-            <input type="checkbox" value="9th" onChange={props.onCheckboxChange}/>
-            <label>9th</label>
+            {levelElements}
         </form>
     );
 }

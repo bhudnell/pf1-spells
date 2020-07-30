@@ -23,6 +23,9 @@ export class SearchParametersContainer extends React.Component {
     }
 
     handleSubmit(event) {
+        // prevent default form submit behavior
+        event.preventDefault();
+
         const queryBase = '/api/spellsearch?'; // todo dont send if its a blank query
         let queryParams = '';
         Object.entries(this.state).forEach(entry => {
@@ -34,7 +37,7 @@ export class SearchParametersContainer extends React.Component {
         .then(res => res.json())
         .then(result => {
             console.log(result);
-            //this.props.onUpdate(result); todo uncomment when table is ready
+            this.props.onUpdate(result);
         },
         error => {
             console.log(error);

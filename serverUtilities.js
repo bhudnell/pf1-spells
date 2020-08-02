@@ -38,18 +38,18 @@ const saveTypes = [
   "none"
 ];
 
-const spellLevels = [
-  "0th",
-  "1st",
-  "2nd",
-  "3rd",
-  "4th",
-  "5th",
-  "6th",
-  "7th",
-  "8th",
-  "9th"
-]
+const spellLevelTypes = {
+  "0th": 0,
+  "1st": 1,
+  "2nd": 2,
+  "3rd": 3,
+  "4th": 4,
+  "5th": 5,
+  "6th": 6,
+  "7th": 7,
+  "8th": 8,
+  "9th": 9
+}
 
 exports.createMySQLConnection = () => {
   return mysql.createConnection({
@@ -63,6 +63,8 @@ exports.createMySQLConnection = () => {
 
 exports.processQuery = url => {
   const processObject = {
+    searchString: '',
+    spellResistance: '',
     classes: [],
     saves: [],
     spellLevels: []
@@ -75,7 +77,7 @@ exports.processQuery = url => {
     else if (value === 'true') // only accept true values for now
     {
       if (key === 'spell_resistance') { // spell resistance toggle
-        processObject.spellResistance = value;
+        processObject.spellResistance = 'yes';
       }
       else if (classTypes.includes(key)) { // this is a class type parameter
         processObject.classes.push(key);
@@ -83,8 +85,8 @@ exports.processQuery = url => {
       else if (saveTypes.includes(key)) { // this is a save type parameter
         processObject.saves.push(key);
       }
-      else if (spellLevels.includes(key)) { // this is a spell level parameter
-        processObject.spellLevels.push(key);
+      else if (Object.keys(spellLevelTypes).includes(key)) { // this is a spell level parameter
+        processObject.spellLevels.push(spellLevelTypes[key]);
       }
     }
   });
@@ -94,46 +96,112 @@ exports.processQuery = url => {
 
 exports.createSQLParameters = queryObject => {
   let SQLParams = ' WHERE';
-
   let firstCondition = true;
-  Object.entries(queryObject).forEach(entry => {
-    if (entry[1].length > 0) {
-      if (!firstCondition) {
-        SQLParams += ' AND';
+
+  // search string
+  if (queryObject.searchString.length > 0) {
+    SQLParams += ` spell_name LIKE '%${queryObject.searchString}%'`;
+    
+    firstCondition = false;
+  }
+
+  // spell resistance
+  if (queryObject.spellResistance.length > 0) {
+    if (!firstCondition) {
+      SQLParams += ' AND ';
+    }
+
+    SQLParams += ` spell_resistance LIKE '%${queryObject.spellResistance}%'`;
+    firstCondition = false;
+  }
+
+  // saves
+  if(queryObject.saves.length > 0) {
+    if (!firstCondition) {
+      SQLParams += ' AND ';
+    }
+
+    SQLParams += ' (';
+    let firstSave = true;
+        
+    queryObject.saves.forEach(save => {
+      if (!firstSave) {
+        SQLParams += ' OR';
       }
-      firstCondition = false;
+      firstSave = false;
+
+      SQLParams += ` saving_throw LIKE '%${save}%'`
+    });
+
+    SQLParams += ')';
+
+    firstCondition = false;
+  }
+
+  // classes and spell levels
+  if (queryObject.classes.length > 0 || queryObject.spellLevels.length > 0) {
+    if (!firstCondition) {
+      SQLParams += ' AND ';
     }
 
-    if (entry[0] === 'searchString') {
-      SQLParams += ` spell_name LIKE '%${entry[1]}%'`
-    }
-    else if (entry[0] === 'spellResistance') {
-      SQLParams += ` spell_resistance LIKE '%${entry[1]}%'`
-    }
-    else if (entry[0] === 'saves') {
-      if (entry[1].length > 0) {
-        SQLParams += ' (';
+    if (queryObject.spellLevels.length === 0) { // only classes
+      SQLParams += ' (';
+      let firstClass = true;
+        
+      queryObject.classes.forEach(myClass => {
+        if (!firstClass) {
+          SQLParams += ' OR';
+        }
+        firstClass = false;
 
-        let firstSave = true;
-        entry[1].forEach(save => {
-          if (!firstSave) {
-            SQLParams += ' OR';
+        SQLParams += ` ${myClass} IS NOT NULL`
+      });
+
+      SQLParams += ')';
+    }    
+    else if (queryObject.classes.length === 0) { // only spell levels
+      SQLParams += ' (';
+      let firstLevel = true;
+        
+      queryObject.spellLevels.forEach(spellLevel => {
+        if (!firstLevel) {
+          SQLParams += ' OR';
+        }
+        firstLevel = false;
+
+        SQLParams += ` spell_level LIKE '%${spellLevel}%'`
+      });
+
+      SQLParams += ')';
+    }
+    else { // both classes and spell levels
+      SQLParams += ' (';
+      let firstParam = true;
+        
+      queryObject.classes.forEach(myClass => {
+        if (!firstParam) {
+          SQLParams += ' OR';
+        }
+        firstParam = false;
+
+        SQLParams += ` ${myClass} IN (`
+
+        let firstLevel = true;
+        queryObject.spellLevels.forEach(spellLevel => {
+          if (!firstLevel) {
+            SQLParams += ',';
           }
-          firstSave = false;
+          firstLevel = false;
 
-          SQLParams += ` saving_throw LIKE '%${save}%'`
+          SQLParams += spellLevel;
         });
 
-        SQLParams += ')';
-      }
-    }
-    else if (entry[0] === 'classes') {
-      
-    }
-    else if (entry[0] === 'spellLevels') {
+        SQLParams += ')'
+      });
 
+      SQLParams += ')';
     }
-  });
-
+  }
+  
   return SQLParams;
 }

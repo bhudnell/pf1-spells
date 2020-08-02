@@ -11,7 +11,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Put all API endpoints under '/api'
 app.get('/api/allspells', (req, res) => {
-  const queryString = 'SELECT * FROM spells'; // todo decide what to display from the database
+  const queryString = 'SELECT spell_name, short_description, spell_level, saving_throw, spell_resistance FROM spells';
 
   // create database connection
   const connection = mysql.createConnection({
@@ -27,13 +27,11 @@ app.get('/api/allspells', (req, res) => {
     if (err) {
       throw err;
     }
-    connection.query(queryString, (err, result, fields) => {
+    connection.query(queryString, (err, result) => {
       if (err) {
         throw err;
       }
 
-      // here we need to handle what to do with the result from the query
-      console.log(result);
       res.json(result);
     });
   });
@@ -47,8 +45,6 @@ app.get('/api/spellsearch', (req, res) => {
   const baseSQL = 'SELECT spell_name, short_description, spell_level, saving_throw, spell_resistance FROM spells';
   const SQLParams = utils.createSQLParameters(queryObject);
 
-  console.log(SQLParams);
-
   // create database connection
   const connection = utils.createMySQLConnection();
 
@@ -57,13 +53,11 @@ app.get('/api/spellsearch', (req, res) => {
     if (err) {
       throw err;
     }
-    connection.query(baseSQL + SQLParams, (err, result, fields) => {
+    connection.query(baseSQL + SQLParams, (err, result) => {
       if (err) {
         throw err;
       }
 
-      // here we need to handle what to do with the result from the query
-      console.log(result);
       res.json(result);
     });
   });
@@ -77,5 +71,3 @@ app.get('*', (req, res) => {
 
 const port = process.env.PORT || 5000;
 app.listen(port);
-
-console.log(`Spell server listening on ${port}`);

@@ -11,7 +11,7 @@ export const SearchParameters = props => {
         { value: "cleric", display: "Cleric" },
         { value: "druid", display: "Druid" },
         { value: "hunter", display: "Hunter" },
-        { value: "inquisitor", display: "Inquisitor" },
+        { value: "inquisitor", display: "Inquisitor" }, // break
         { value: "investigator", display: "Investigator" },
         { value: "magus", display: "Magus" },
         { value: "spell_medium", display: "Medium" },
@@ -20,7 +20,7 @@ export const SearchParameters = props => {
         { value: "oracle", display: "Oracle" },
         { value: "paladin", display: "Paladin" },
         { value: "psychic", display: "Psychic" },
-        { value: "ranger", display: "Ranger" },
+        { value: "ranger", display: "Ranger" }, // break
         { value: "shaman", display: "Shaman" },
         { value: "skald", display: "Skald" },
         { value: "sorc", display: "Sorcerer" },
@@ -48,39 +48,15 @@ export const SearchParameters = props => {
         { value: "8th", display: "8th" },
         { value: "9th", display: "9th" }
     ];
-    let classElements = classes.map(classElement => { // todo add <br /> somewhere
+    const iterateCheckboxArray = checkboxArray => checkboxArray.map(element => {
         return (
-            <React.Fragment key={classElement.display}>
-                <input
-                    key={classElement.display}                    type="checkbox"
-                    value={classElement.value}
-                    onChange={props.onCheckboxChange}
-                />
-                <label>{classElement.display}</label>
-            </React.Fragment>
-        );
-    });
-    let saveElements = saves.map(saveElement => {
-        return (
-            <React.Fragment key={saveElement.display}>
+            <React.Fragment key={element.display}>
                 <input
                     type="checkbox"
-                    value={saveElement.value}
+                    value={element.value}
                     onChange={props.onCheckboxChange}
                 />
-                <label>{saveElement.display}</label>
-            </React.Fragment>
-        );
-    });
-    let levelElements = spellLevel.map(levelElement => {
-        return (
-            <React.Fragment key={levelElement.display}>
-                <input
-                    type="checkbox"
-                    value={levelElement.value}
-                    onChange={props.onCheckboxChange}
-                />
-                <label>{levelElement.display}</label>
+                <label className="CheckboxLabel">{element.display}</label>
             </React.Fragment>
         );
     });
@@ -90,14 +66,18 @@ export const SearchParameters = props => {
             <input type="text" onChange={props.onTextChange}/>
             <input type="submit" value="Search"/> 
             <br /><br />
-            {classElements}
+            {iterateCheckboxArray(classes.slice(0, 9))}
+            <br />
+            {iterateCheckboxArray(classes.slice(9, 18))}
+            <br />
+            {iterateCheckboxArray(classes.slice(18, 26))}
             <br /><br />
             <input type="checkbox" value="spell_resistance" onChange={props.onCheckboxChange}/>
             <label>Spell Resistance</label>
             <br /><br />
-            {saveElements}            
+            {iterateCheckboxArray(saves)}            
             <br /><br />
-            {levelElements}
+            {iterateCheckboxArray(spellLevel)}
         </form>
     );
 }

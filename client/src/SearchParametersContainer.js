@@ -26,8 +26,11 @@ export class SearchParametersContainer extends React.Component {
         // prevent default form submit behavior
         event.preventDefault();
 
-        const queryBase = '/api/spellsearch?'; // todo dont send if its a blank query
+        const queryBase = '/api/spellsearch?';
         let queryParams = '';
+
+        console.log(this.state);
+
         Object.entries(this.state).forEach(entry => {
             queryParams += `${entry[0]}=${entry[1]}&`;
         });
@@ -36,7 +39,6 @@ export class SearchParametersContainer extends React.Component {
         fetch(queryString)
         .then(res => res.json())
         .then(result => {
-            console.log(result);
             this.props.onUpdate(result);
         },
         error => {

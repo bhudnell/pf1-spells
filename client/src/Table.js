@@ -8,11 +8,11 @@ export class Table extends React.Component {
            return tableData.map(row => {
              return (
                 <tr key={row.spell_name}>
-                   <td>{row.spell_name}</td>
-                   <td>{row.spell_level}</td>
-                   <td>{row.short_description}</td>
-                   <td>{row.saving_throw}</td>
-                   <td>{row.spell_resistance}</td>
+                   <td className="bordered">{row.spell_name}</td>
+                   <td className="bordered">{row.spell_level}</td>
+                   <td className="bordered">{row.short_description}</td>
+                   <td className="bordered">{row.saving_throw}</td>
+                   <td className="bordered">{row.spell_resistance}</td>
                 </tr>
              );
            })
@@ -20,14 +20,14 @@ export class Table extends React.Component {
 
         // create the table itself
         return (
-            <table>
+            <table className="bordered">
                 <tbody>
                     <tr>
-                        <th>Spell Name</th>
-                        <th>Spell Level</th>
-                        <th>Spell Description</th>
-                        <th>Saving Throw</th>
-                        <th>Spell Resistance</th>
+                        <th className="bordered">Spell Name</th>
+                        <th className="bordered">Spell Level</th>
+                        <th className="bordered">Spell Description</th>
+                        <th className="bordered">Saving Throw</th>
+                        <th className="bordered">Spell Resistance</th>
                     </tr>
                     {createRows(tableData)}
                 </tbody>
@@ -36,12 +36,11 @@ export class Table extends React.Component {
     };
 
     render() {
-        if (this.props.tableData) {
-            return <div>{this.getTableContent(this.props.tableData)}</div>;
-        }
-        else {            
-            return <></>;
-        }
+        return (
+            <div className="results">
+                {this.props.tableData ? this.getTableContent(this.props.tableData) : null}
+            </div>
+        );
     }        
 }
 

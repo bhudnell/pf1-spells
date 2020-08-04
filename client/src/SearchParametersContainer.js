@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { SearchParameters } from './SearchParameters';
+import { BasicParameters } from './BasicParameters';
+import { AdvancedParameters } from './AdvancedParameters';
 
 export class SearchParametersContainer extends React.Component {
     constructor(props) {
@@ -29,8 +30,6 @@ export class SearchParametersContainer extends React.Component {
         const queryBase = '/api/spellsearch?';
         let queryParams = '';
 
-        console.log(this.state);
-
         Object.entries(this.state).forEach(entry => {
             queryParams += `${entry[0]}=${entry[1]}&`;
         });
@@ -47,10 +46,19 @@ export class SearchParametersContainer extends React.Component {
     }
 
     render() {
-        return <SearchParameters
-            onCheckboxChange={this.handleCheckboxChange}
-            onSubmit={this.handleSubmit}
-            onTextChange={this.handleTextChange} />;
+        return (
+            <div>
+                <BasicParameters
+                    onCheckboxChange={this.handleCheckboxChange}
+                    onSubmit={this.handleSubmit}
+                    onTextChange={this.handleTextChange}
+                />
+                <br />
+                <AdvancedParameters
+                    onCheckboxChange={this.handleCheckboxChange}
+                />
+            </div>
+        );
     }
 }
 

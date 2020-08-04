@@ -2,18 +2,27 @@
   text-align: center;
 }
 
-label.CheckboxLabel {
+label.checkbox {
   margin-right: 10px;
 }
 
-table, th, td {
+h4.parameterLabel {
+  text-align: left;
+  margin-left: 25%;
+  margin-bottom: 10px;
+}
+
+table.bordered, th.bordered, td.bordered {
   border: 1px solid black;
 }
 
-table {
+table.bordered {
   border-collapse: collapse;
-  margin-left: 50px;
-  margin-right: 50px;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 th {
@@ -21,7 +30,56 @@ th {
 }
 
 th, td {
-  text-align: center;
+  text-align: left;
   vertical-align: middle;
   padding: 5px;
 }
+
+.config {
+  margin-left: 25%;
+  text-align: left;
+}
+
+.blob {
+  padding: 15px;
+}
+
+.results {
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.collapsible {
+  vertical-align: middle;
+  text-align: left;
+  cursor: pointer;
+  background-color: white;
+  padding: 18px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+}
+
+.collapsible:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  float: left;
+}
+
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+.ReactCollapse--collapse {
+  border: 1px solid black;
+  border-radius: 10px;
+  transition: height 500ms;
+  content: center;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
+/*
+.ReactCollapse--content {
+
+}
+*/

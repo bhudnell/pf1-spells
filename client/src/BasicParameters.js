@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const SearchParameters = props => {
+export const BasicParameters = props => {
     const classes = [
         { value: "alchemist", display: "Alchemist" },
         { value: "antipaladin", display: "Antipaladin" },
@@ -26,16 +26,11 @@ export const SearchParameters = props => {
         { value: "sorc", display: "Sorcerer" },
         { value: "spiritualist", display: "Spiritualist" },
         { value: "summoner", display: "Summoner" },
-        { value: "summoner_unchained", display: "Summoner (Unchained)" },
         { value: "witch", display: "Witch" },
-        { value: "wiz", display: "Wizard" }
-    ];
-    const saves = [
-        { value: "fortitude", display: "Fortitude Save" },
-        { value: "reflex", display: "Reflex Save" },
-        { value: "will", display: "Will Save" },
-        { value: "none", display: "No Save" }
-    ];
+        { value: "wiz", display: "Wizard" },        
+        { value: "summoner_unchained", display: "Summoner (Unchained)" }
+    ];    
+
     const spellLevel = [
         { value: "0th", display: "0th" },
         { value: "1st", display: "1st" },
@@ -47,17 +42,18 @@ export const SearchParameters = props => {
         { value: "7th", display: "7th" },
         { value: "8th", display: "8th" },
         { value: "9th", display: "9th" }
-    ];
-    const iterateCheckboxArray = checkboxArray => checkboxArray.map(element => {
+    ]; 
+    
+    const createTableRow = checkboxArray => checkboxArray.map(element => {
         return (
-            <React.Fragment key={element.display}>
+            <td key={element.display}>
                 <input
                     type="checkbox"
                     value={element.value}
                     onChange={props.onCheckboxChange}
                 />
-                <label className="CheckboxLabel">{element.display}</label>
-            </React.Fragment>
+                <label>{element.display}</label>
+            </ td>
         );
     });
 
@@ -66,23 +62,33 @@ export const SearchParameters = props => {
             <input type="text" onChange={props.onTextChange}/>
             <input type="submit" value="Search"/> 
             <br /><br />
-            {iterateCheckboxArray(classes.slice(0, 9))}
-            <br />
-            {iterateCheckboxArray(classes.slice(9, 18))}
-            <br />
-            {iterateCheckboxArray(classes.slice(18, 26))}
-            <br /><br />
-            <input type="checkbox" value="spell_resistance" onChange={props.onCheckboxChange}/>
-            <label>Spell Resistance</label>
-            <br /><br />
-            {iterateCheckboxArray(saves)}            
-            <br /><br />
-            {iterateCheckboxArray(spellLevel)}
+            <h4 className="parameterLabel">Class:</h4>
+            <table>
+                <tbody>
+                    <tr>
+                        {createTableRow(classes.slice(0, 8))}
+                    </tr>
+                    <tr>
+                        {createTableRow(classes.slice(8, 17))}
+                    </tr>
+                    <tr>
+                        {createTableRow(classes.slice(17, 26))}
+                    </tr>
+                </tbody>
+            </table>                        
+            <h4 className="parameterLabel">Spell level:</h4>
+            <table>
+                <tbody>
+                    <tr>
+                        {createTableRow(spellLevel)}
+                    </tr>
+                </tbody>
+            </table> 
         </form>
     );
 }
 
-SearchParameters.propTypes = {
+BasicParameters.propTypes = {
     onCheckboxChange: PropTypes.func.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onTextChange: PropTypes.func.isRequired

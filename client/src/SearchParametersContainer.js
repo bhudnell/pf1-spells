@@ -14,6 +14,7 @@ export class SearchParametersContainer extends React.Component {
         this.handleTextChange = this.handleTextChange.bind(this);
         this.handleRadioChange = this.handleRadioChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.isStateEmpty = this.isStateEmpty.bind(this);
     }
 
     handleCheckboxChange(event) {
@@ -28,9 +29,30 @@ export class SearchParametersContainer extends React.Component {
         this.setState({ spellResistance: event.target.value });
     }
 
+    isStateEmpty() {
+        const entries = Object.entries(this.state);
+        for (let i = 0; i < entries.length; i++) {
+            if (entries[i][0] === 'searchString' && entries[i][1].length > 0) { // searchString
+                return false;
+            }
+            else if (entries[i][0] === 'spellResistance' && entries[i][1] !== 'either') { // spellResistance
+                return false;
+            }
+            else if (entries[i][1] === true) { // the rest
+                return false;
+            }
+        }
+        return true;
+    }
+
     handleSubmit(event) {
         // prevent default form submit behavior
         event.preventDefault();
+
+        // if there are no parameters, dont send request
+        if (this.isStateEmpty()) {
+            return;
+        }
 
         const queryBase = '/api/spellsearch?';
         let queryParams = '';

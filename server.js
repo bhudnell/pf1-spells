@@ -10,33 +10,6 @@ const app = express();
 app.use(express.static(path.join(__dirname, 'client/build')));
 
 // Put all API endpoints under '/api'
-app.get('/api/allspells', (req, res) => {
-  const queryString = 'SELECT spell_name, short_description, spell_level, saving_throw, spell_resistance FROM spells';
-
-  // create database connection
-  const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    database: process.env.DB_DBASE,
-    port: process.env.DB_PORT
-  });
-
-  // connect to database and perform query
-  connection.connect(err => {
-    if (err) {
-      throw err;
-    }
-    connection.query(queryString, (err, result) => {
-      if (err) {
-        throw err;
-      }
-
-      res.json(result);
-    });
-  });
-});
-
 app.get('/api/spellsearch', (req, res) => {
   // get the query parameters
   const queryObject = utils.processQuery(new URL(req.url, "https://dummyurl.com"));

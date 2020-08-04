@@ -97,6 +97,22 @@ exports.processQuery = url => {
 }
 
 exports.createSQLParameters = queryObject => {
+  // function to determine if queryObject is empty
+  const isObjectEmpty = myObject => {
+    const values = Object.values(myObject);
+    for (let i = 0; i < values.length; i++) {
+      if (values[i].length > 0) {
+        return false;
+      }
+    }
+    return true;
+  }
+  
+  // if the queryObject is empty, return
+  if (isObjectEmpty(queryObject)) {
+    return '';
+  }
+
   let SQLParams = ' WHERE';
   let firstCondition = true;
 

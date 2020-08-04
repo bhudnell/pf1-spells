@@ -59,7 +59,7 @@ export const BasicParameters = props => {
 
     return (
         <form onSubmit={props.onSubmit}>
-            <input type="text" onChange={props.onTextChange}/>
+            <input id="searchText" type="text" onChange={props.onTextChange}/>
             <input type="submit" value="Search"/> 
             <br /><br />
             <h4 className="parameterLabel">Class:</h4>

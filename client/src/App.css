@@ -1,6 +1,6 @@
-.App {
+/*.App {
   text-align: center;
-}
+}*/
 
 label.checkbox {
   margin-right: 10px;
@@ -10,6 +10,11 @@ h4.parameterLabel {
   text-align: left;
   margin-left: 25%;
   margin-bottom: 10px;
+}
+
+#searchText {
+  width: 30%;
+  margin-left: 25%;
 }
 
 table.bordered, th.bordered, td.bordered {
@@ -61,12 +66,12 @@ th, td {
 }
 
 .collapsible:after {
-  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  content: '\FF0B'; /* Unicode character for "plus" sign (+) */
   float: left;
 }
 
 .active:after {
-  content: "\2796"; /* Unicode character for "minus" sign (-) */
+  content: "\FF0D"; /* Unicode character for "minus" sign (-) */
 }
 
 .ReactCollapse--collapse {

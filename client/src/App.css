@@ -25,9 +25,8 @@ table.bordered {
   border-collapse: collapse;
 }
 
-table {
-  margin-left: auto;
-  margin-right: auto;
+table.parameters {
+  margin-left: 25%;
 }
 
 th {
@@ -45,10 +44,6 @@ th, td {
   text-align: left;
 }
 
-.blob {
-  padding: 15px;
-}
-
 .results {
   margin-left: 10%;
   margin-right: 10%;
@@ -59,7 +54,6 @@ th, td {
   text-align: left;
   cursor: pointer;
   background-color: white;
-  padding: 18px;
   border: none;
   outline: none;
   font-size: 15px;
@@ -75,8 +69,6 @@ th, td {
 }
 
 .ReactCollapse--collapse {
-  border: 1px solid black;
-  border-radius: 10px;
   transition: height 500ms;
   content: center;
   margin-left: 25%;

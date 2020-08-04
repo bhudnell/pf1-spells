@@ -61,9 +61,9 @@ export const BasicParameters = props => {
         <form onSubmit={props.onSubmit}>
             <input id="searchText" type="text" onChange={props.onTextChange}/>
             <input type="submit" value="Search"/> 
-            <br /><br />
+            <br />
             <h4 className="parameterLabel">Class:</h4>
-            <table>
+            <table className="parameters">
                 <tbody>
                     <tr>
                         {createTableRow(classes.slice(0, 8))}
@@ -77,7 +77,7 @@ export const BasicParameters = props => {
                 </tbody>
             </table>                        
             <h4 className="parameterLabel">Spell level:</h4>
-            <table>
+            <table className="parameters">
                 <tbody>
                     <tr>
                         {createTableRow(spellLevel)}

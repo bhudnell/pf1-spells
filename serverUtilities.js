@@ -74,12 +74,14 @@ exports.processQuery = url => {
     if (key === 'searchString' && value.length > 0) { // text user is searching for
       processObject.searchString = value;
     }
+    else if (key === 'spellResistance' && value.length > 0) { // spell resistance (yes, no, either)
+      if (value === 'yes' || value === 'no') {
+        processObject.spellResistance = value;
+      }
+    }
     else if (value === 'true') // only accept true values for now
     {
-      if (key === 'spell_resistance') { // spell resistance toggle
-        processObject.spellResistance = 'yes';
-      }
-      else if (classTypes.includes(key)) { // this is a class type parameter
+      if (classTypes.includes(key)) { // this is a class type parameter
         processObject.classes.push(key);
       }
       else if (saveTypes.includes(key)) { // this is a save type parameter

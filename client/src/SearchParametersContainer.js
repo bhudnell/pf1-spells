@@ -12,6 +12,7 @@ export class SearchParametersContainer extends React.Component {
 
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
+        this.handleRadioChange = this.handleRadioChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -21,6 +22,10 @@ export class SearchParametersContainer extends React.Component {
 
     handleTextChange(event) {
         this.setState({ searchString: event.target.value });
+    }
+
+    handleRadioChange(event) {
+        this.setState({ spellResistance: event.target.value });
     }
 
     handleSubmit(event) {
@@ -56,6 +61,7 @@ export class SearchParametersContainer extends React.Component {
                 <br />
                 <AdvancedParameters
                     onCheckboxChange={this.handleCheckboxChange}
+                    onRadioChange={this.handleRadioChange}
                 />
             </div>
         );

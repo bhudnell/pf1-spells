@@ -3,26 +3,40 @@ import PropTypes from 'prop-types';
 import Collapse from 'react-collapse';
 
 const saves = [
-    { value: "fortitude", display: "Fortitude Save" },
-    { value: "reflex", display: "Reflex Save" },
-    { value: "will", display: "Will Save" },
-    { value: "none", display: "No Save" }
+    { value: "fortitude", display: "Fortitude" },
+    { value: "reflex", display: "Reflex" },
+    { value: "will", display: "Will" },
+    { value: "none", display: "None" }
+];
+
+const spellResistance = [
+    { value: "yes", display: "Yes" },
+    { value: "no", display: "No" },
+    { value: "either", display: "Either" }
 ];
 
 export class AdvancedParameters extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {isOpened: false};
+        this.state = {
+            isOpened: false,
+            selectedOption: 'either'
+        };
 
         this.iterateCheckboxArray = this.iterateCheckboxArray.bind(this);
+        this.iterateRadioArray = this.iterateRadioArray.bind(this);
         this.onClicked = this.onClicked.bind(this);
+        this.onChecked = this.onChecked.bind(this);
     }
 
     onClicked() {
-        this.setState(state => ({
-            isOpened: !state.isOpened
-          }));
+        this.setState(state => ({ isOpened: !state.isOpened }));
+    }
+
+    onChecked(event) {
+        this.setState({ selectedOption: event.target.value });
+        this.props.onRadioChange(event);
     }
 
     iterateCheckboxArray(checkboxArray) {
@@ -40,6 +54,22 @@ export class AdvancedParameters extends React.Component {
         });
     }
 
+    iterateRadioArray(radioArray) {
+        return radioArray.map(element => {
+            return (
+                <React.Fragment key={element.display}>
+                    <input
+                        type="radio"
+                        value={element.value}
+                        checked={this.state.selectedOption === element.value}
+                        onChange={this.onChecked}
+                    />
+                    <label className="checkbox">{element.display}</label>
+                </React.Fragment>
+            );
+        });
+    }
+
     render() {
         return (
             <div>
@@ -48,9 +78,10 @@ export class AdvancedParameters extends React.Component {
                 </div>
                 <Collapse isOpened={this.state.isOpened}>
                     <div className="blob">
-                        <input type="checkbox" value="spell_resistance" onChange={this.props.onCheckboxChange}/>
-                        <label>Spell Resistance</label>
-                        <br /><br />
+                        <h4>Spell Resistance:</h4>
+                        {this.iterateRadioArray(spellResistance)}
+                        <br />
+                        <h4>Saves:</h4>
                         {this.iterateCheckboxArray(saves)}
                     </div>
                 </Collapse>
@@ -60,5 +91,6 @@ export class AdvancedParameters extends React.Component {
 }
 
 AdvancedParameters.propTypes = {
-    onCheckboxChange: PropTypes.func.isRequired
+    onCheckboxChange: PropTypes.func.isRequired,
+    onRadioChange: PropTypes.func.isRequired
 };

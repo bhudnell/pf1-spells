@@ -46,13 +46,15 @@ export const BasicParameters = props => {
     
     const createTableRow = checkboxArray => checkboxArray.map(element => {
         return (
-            <td key={element.display}>
-                <input
-                    type="checkbox"
-                    value={element.value}
-                    onChange={props.onCheckboxChange}
-                />
-                <label>{element.display}</label>
+            <td key={element.display}>                
+                <label>
+                    <input
+                        type="checkbox"
+                        value={element.value}
+                        onChange={props.onCheckboxChange}
+                    />
+                    {element.display}
+                </label>
             </ td>
         );
     });

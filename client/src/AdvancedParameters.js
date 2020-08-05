@@ -43,12 +43,14 @@ export class AdvancedParameters extends React.Component {
         return checkboxArray.map(element => {
             return (
                 <React.Fragment key={element.display}>
-                    <input
-                        type="checkbox"
-                        value={element.value}
-                        onChange={this.props.onCheckboxChange}
-                    />
-                    <label className="checkbox">{element.display}</label>
+                    <label className="checkbox">
+                        <input
+                            type="checkbox"
+                            value={element.value}
+                            onChange={this.props.onCheckboxChange}
+                        />
+                        {element.display}
+                    </label>
                 </React.Fragment>
             );
         });
@@ -58,13 +60,15 @@ export class AdvancedParameters extends React.Component {
         return radioArray.map(element => {
             return (
                 <React.Fragment key={element.display}>
-                    <input
-                        type="radio"
-                        value={element.value}
-                        checked={this.state.selectedOption === element.value}
-                        onChange={this.onChecked}
-                    />
-                    <label className="checkbox">{element.display}</label>
+                    <label className="checkbox">
+                        <input
+                            type="radio"
+                            value={element.value}
+                            checked={this.state.selectedOption === element.value}
+                            onChange={this.onChecked}
+                        />
+                        {element.display}
+                    </label>
                 </React.Fragment>
             );
         });

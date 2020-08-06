@@ -37,7 +37,7 @@ export class Table extends React.Component {
 
     render() {
         return (
-            <div className="results">
+            <div className="results" id="tableContainer">
                 {this.props.tableData ? this.getTableContent(this.props.tableData) : null}
             </div>
         );

@@ -24,10 +24,12 @@ app.get('/api/spellsearch', (req, res) => {
   // connect to database and perform query
   connection.connect(err => {
     if (err) {
+      console.log(err);
       throw err;
     }
     connection.query(baseSQL + SQLParams, (err, result) => {
       if (err) {
+        console.log(err);
         throw err;
       }
 

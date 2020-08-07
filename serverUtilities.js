@@ -83,7 +83,6 @@ exports.processQuery = url => {
     {
       if (classTypes.includes(key)) { // this is a class type parameter
         const newKey = key === 'arcanist' ? 'wiz' : key; // arcanist is treated the same as wizard in the database
-        console.log(newKey);
         processObject.classes.push(newKey);
       }
       else if (saveTypes.includes(key)) { // this is a save type parameter

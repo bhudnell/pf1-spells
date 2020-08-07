@@ -32,6 +32,7 @@ th.bordered {
   position: sticky;
   top: 0;
   background-color: white;
+  cursor: pointer;
 }
 
 #tableContainer {
@@ -61,6 +62,14 @@ th, td {
 .results {
   margin-left: 10%;
   margin-right: 10%;
+}
+
+.descendingSort:after {
+    content: '\23F6'; /* Unicode character for upside down triangle */
+}
+
+.ascendingSort:after {
+    content: '\23F7'; /* Unicode character for rightside up triangle */
 }
 
 .collapsible {

@@ -5,7 +5,7 @@ export class Table extends React.Component {
 constructor(props) {
     super(props);
 
-    this.state = { 
+    this.state = {
         data: [],
         isSorted: {
             spell_name: false,
@@ -20,7 +20,8 @@ constructor(props) {
             short_description: true,
             saving_throw: true,
             spell_resistance: true
-        }
+        },
+        isSearch: false
     };
 
     this.onSort = this.onSort.bind(this);
@@ -141,14 +142,20 @@ constructor(props) {
     componentDidUpdate(prevProps) {
         if (prevProps.tableData !== this.props.tableData) {
             const data = this.props.tableData;
-            this.setState({ data });    
+            this.setState({ 
+                data,
+                isSearch: true
+             });    
         }
     }
 
-    render() { // todo add in the up/down arrows for sorting
+    render() {
         return (
-            <div className="results" id="tableContainer">
-                {this.state.data.length > 0 ? this.getTableContent(this.state.data) : null}
+            <div className="results">
+                <h4>{this.state.isSearch ? `${this.state.data.length} results found.` : ''}</h4>
+                <div id="tableContainer">
+                    {this.state.data.length > 0 ? this.getTableContent(this.state.data) : null}
+                </div>
             </div>
         );
     }        

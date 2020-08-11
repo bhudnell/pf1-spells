@@ -42,16 +42,14 @@ export class AdvancedParameters extends React.Component {
     iterateCheckboxArray(checkboxArray) {
         return checkboxArray.map(element => {
             return (
-                <React.Fragment key={element.display}>
-                    <label className="checkbox">
-                        <input
-                            type="checkbox"
-                            value={element.value}
-                            onChange={this.props.onCheckboxChange}
-                        />
-                        {element.display}
-                    </label>
-                </React.Fragment>
+                <label className="checkbox" key={element.display}>
+                    <input
+                        type="checkbox"
+                        value={element.value}
+                        onChange={this.props.onCheckboxChange}
+                    />
+                    {element.display}
+                </label>
             );
         });
     }
@@ -59,17 +57,15 @@ export class AdvancedParameters extends React.Component {
     iterateRadioArray(radioArray) {
         return radioArray.map(element => {
             return (
-                <React.Fragment key={element.display}>
-                    <label className="checkbox">
-                        <input
-                            type="radio"
-                            value={element.value}
-                            checked={this.state.selectedOption === element.value}
-                            onChange={this.onChecked}
-                        />
-                        {element.display}
-                    </label>
-                </React.Fragment>
+                <label className="checkbox" key={element.display}>
+                    <input
+                        type="radio"
+                        value={element.value}
+                        checked={this.state.selectedOption === element.value}
+                        onChange={this.onChecked}
+                    />
+                    {element.display}
+                </label>
             );
         });
     }

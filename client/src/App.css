@@ -35,6 +35,24 @@ th.bordered {
   cursor: pointer;
 }
 
+td.bordered {
+  padding: 10px;
+}
+
+tr.bordered {
+  cursor: pointer;
+}
+
+td.expand {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 15px;
+}
+
+tr.hidden {
+  display: none;
+}
+
 #tableContainer {
   max-height: 500px;
   overflow-y: auto;

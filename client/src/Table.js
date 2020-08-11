@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactHtmlParser from 'react-html-parser';
 
 const tableColumns = [
     { value: 'spell_name', display: 'Spell Name' },
@@ -10,62 +11,88 @@ const tableColumns = [
 ];
 
 export class Table extends React.Component {
-constructor(props) {
-    super(props);
+    constructor(props) {
+        super(props);
 
-    this.state = {
-        data: [],
-        isSorted: {
-            spell_name: false,
-            spell_level: false,
-            short_description: false,
-            saving_throw: false,
-            spell_resistance: false
-        },
-        sortDirection: { // true = ascending, false = descending
-            spell_name: true,
-            spell_level: true,
-            short_description: true,
-            saving_throw: true,
-            spell_resistance: true
-        },
-        isSearch: false
-    };
+        this.state = {
+            data: [],
+            isSorted: {
+                spell_name: false,
+                spell_level: false,
+                short_description: false,
+                saving_throw: false,
+                spell_resistance: false
+            },
+            sortDirection: { // true = ascending, false = descending
+                spell_name: true,
+                spell_level: true,
+                short_description: true,
+                saving_throw: true,
+                spell_resistance: true
+            },
+            isSearch: false,
+            isDropDown: [],
+            prevExpand: -1
+        };
 
-    this.onSort = this.onSort.bind(this);
-    this.getTableContent = this.getTableContent.bind(this);
-}
+        this.onSort = this.onSort.bind(this);
+        this.getTableContent = this.getTableContent.bind(this);
+        this.doExpand = this.doExpand.bind(this);
+    }
+
+    doExpand(e, index) {
+        const isDropDown = this.state.isDropDown;
+
+        isDropDown[index] = !isDropDown[index];
+        if (this.state.prevExpand !== -1 && this.state.prevExpand !== index) {
+            isDropDown[this.state.prevExpand] = false;
+        }
+
+        this.setState({ 
+            isDropDown,
+            prevExpand: index
+        });
+    }
 
     getTableContent(tableData) {
         // function to iterate through the tableData to create the table rows
         const createRows = tableData => {
-           return tableData.map(row => {
+           return tableData.map((row, index) => {
              return (
-                <tr key={row.spell_name}>
-                   <td className="bordered">{row.spell_name}</td>
-                   <td className="bordered">{row.spell_level}</td>
-                   <td className="bordered">{row.short_description}</td>
-                   <td className="bordered">{row.saving_throw}</td>
-                   <td className="bordered">{row.spell_resistance}</td>
-                </tr>
+                <React.Fragment key={row.spell_name}>
+                    <tr className="bordered" onClick={e => this.doExpand(e, index)}>
+                        <td className="bordered">{row.spell_name}</td>
+                        <td className="bordered">{row.spell_level}</td>
+                        <td className="bordered">{row.short_description}</td>
+                        <td className="bordered">{row.saving_throw}</td>
+                        <td className="bordered">{row.spell_resistance}</td>
+                    </tr>
+                    <tr className={this.state.isDropDown[index] ? "" : "hidden"}>
+                        <td className="expand" colSpan={tableColumns.length}>
+                            {ReactHtmlParser(row.description_formatted)}
+                        </td>
+                    </tr>
+                </React.Fragment>
              );
            });
-        }
+        }        
+
+        const isSorted = this.state.isSorted;
+        const sortDirection = this.state.sortDirection;
 
         const createHeaders = headers => {
             return headers.map(header => {
                 return (
                     <th 
+                        key={header.display}
                         className={isSorted[header.value] ? (sortDirection[header.value] ? "bordered ascendingSort" : "bordered descendingSort") : "bordered" }
-                        onClick={e => this.onSort(e, header.value)}>
-                            {header.display}
+                        onClick={e => this.onSort(e, header.value)}
+                    >
+                        {header.display}
                     </th>
                 );
             });
         }
-
-        const isSorted = this.state.isSorted;
-        const sortDirection = this.state.sortDirection;
 
         // create the table itself
         return (
@@ -81,21 +108,21 @@ constructor(props) {
     }
 
     onSort(e, sortKey) {
-        const newData = this.state.data;
-        const newSorted = this.state.isSorted;
-        const newDirection = this.state.sortDirection;
+        const data = this.state.data;
+        const isSorted = this.state.isSorted;
+        const sortDirection = this.state.sortDirection;
 
         // mark the sortKey column as sorted, the rest as not
-        Object.keys(newSorted).forEach(key => {
+        Object.keys(isSorted).forEach(key => {
             if (key === sortKey) {
-                newSorted[key] = true;
+                isSorted[key] = true;
             }
             else {
-                newSorted[key] = false;
+                isSorted[key] = false;
             }
         });
 
-        newData.sort((a, b) => {
+        data.sort((a, b) => {
             // equal items sort equally
             if (a[sortKey] === b[sortKey]) {
                 return 0;
@@ -108,7 +135,7 @@ constructor(props) {
                 return -1;
             }
             // otherwise, if we're ascending, lowest sorts first
-            else if (newDirection[sortKey]) {
+            else if (sortDirection[sortKey]) {
                 return a[sortKey] < b[sortKey] ? -1 : 1;
             }
             // if descending, highest sorts first
@@ -118,29 +145,32 @@ constructor(props) {
         });
 
         // change the sortDirection
-        const sortKeyDirection = newDirection[sortKey];
-        Object.keys(newDirection).forEach(key => {
+        const sortKeyDirection = sortDirection[sortKey];
+        Object.keys(sortDirection).forEach(key => {
             if (key === sortKey) {
-                newDirection[key] = !sortKeyDirection;
+                sortDirection[key] = !sortKeyDirection;
             }
             else {
-                newDirection[key] = true;
+                sortDirection[key] = true;
             }
         });
         
         this.setState({ 
-            data: newData,
-            isSorted: newSorted,
-            sortDirection: newDirection
+            data,
+            isSorted,
+            sortDirection
         });
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.tableData !== this.props.tableData) {
             const data = this.props.tableData;
+            const isDropDown = data.map(() => false);
+
             this.setState({ 
                 data,
-                isSearch: true
+                isSearch: true,
+                isDropDown
              });    
         }
     }

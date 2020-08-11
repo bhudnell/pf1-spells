@@ -15,7 +15,7 @@ app.get('/api/spellsearch', (req, res) => {
   const queryObject = utils.processQuery(new URL(req.url, "https://dummyurl.com"));
 
   // create the query string
-  const baseSQL = 'SELECT spell_name, short_description, spell_level, saving_throw, spell_resistance FROM spells';
+  const baseSQL = 'SELECT spell_name, description_formatted, short_description, spell_level, saving_throw, spell_resistance FROM spells';
   const SQLParams = utils.createSQLParameters(queryObject);
 
   // create database connection

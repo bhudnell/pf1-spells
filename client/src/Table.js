@@ -1,6 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const tableColumns = [
+    { value: 'spell_name', display: 'Spell Name' },
+    { value: 'spell_level', display: 'Spell Level' },
+    { value: 'short_description', display: 'Spell Description' },
+    { value: 'saving_throw', display: 'Saving Throw' },
+    { value: 'spell_resistance', display: 'Spell Resistance' }
+];
+
 export class Table extends React.Component {
 constructor(props) {
     super(props);
@@ -41,7 +49,19 @@ constructor(props) {
                    <td className="bordered">{row.spell_resistance}</td>
                 </tr>
              );
-           })
+           });
+        }
+
+        const createHeaders = headers => {
+            return headers.map(header => {
+                return (
+                    <th 
+                        className={isSorted[header.value] ? (sortDirection[header.value] ? "bordered ascendingSort" : "bordered descendingSort") : "bordered" }
+                        onClick={e => this.onSort(e, header.value)}>
+                            {header.display}
+                    </th>
+                );
+            });
         }
 
         const isSorted = this.state.isSorted;
@@ -52,31 +72,7 @@ constructor(props) {
             <table className="bordered">
                 <tbody>
                     <tr>
-                        <th 
-                            className={isSorted.spell_name ? (sortDirection.spell_name ? "bordered ascendingSort" : "bordered descendingSort") : "bordered" }
-                            onClick={e => this.onSort(e, 'spell_name')}>
-                                Spell Name
-                        </th>
-                        <th 
-                            className={isSorted.spell_level ? (sortDirection.spell_level ? "bordered ascendingSort" : "bordered descendingSort") : "bordered" }
-                            onClick={e => this.onSort(e, 'spell_level')}>
-                                Spell Level
-                        </th>
-                        <th 
-                        className={isSorted.short_description ? (sortDirection.short_description ? "bordered ascendingSort" : "bordered descendingSort") : "bordered" }
-                        onClick={e => this.onSort(e, 'short_description')}>
-                            Spell Description
-                            </th>
-                        <th 
-                        className={isSorted.saving_throw ? (sortDirection.saving_throw ? "bordered ascendingSort" : "bordered descendingSort") : "bordered" }
-                        onClick={e => this.onSort(e, 'saving_throw')}>
-                            Saving Throw
-                            </th>
-                        <th 
-                        className={isSorted.spell_resistance ? (sortDirection.spell_resistance ? "bordered ascendingSort" : "bordered descendingSort") : "bordered" }
-                        onClick={e => this.onSort(e, 'spell_resistance')}>
-                            Spell Resistance
-                            </th>
+                        {createHeaders(tableColumns)}
                     </tr>
                     {createRows(tableData)}
                 </tbody>

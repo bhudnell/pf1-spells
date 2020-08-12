@@ -54,8 +54,9 @@ tr.hidden {
 }
 
 #tableContainer {
-  max-height: 500px;
+  max-height: 800px;
   overflow-y: auto;
+  margin-bottom: 50px;
 }
 
 table.parameters {
@@ -111,7 +112,6 @@ th, td {
 
 .ReactCollapse--collapse {
   transition: height 500ms;
-  content: center;
   margin-left: 25%;
   margin-right: 25%;
 }

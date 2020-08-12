@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Table } from './Table';
+import { TableContainer } from './TableContainer';
 import { SearchParametersContainer } from './SearchParametersContainer';
 
 export class Main extends React.Component {
@@ -24,7 +24,7 @@ export class Main extends React.Component {
                 <br />
                 <SearchParametersContainer onUpdate={this.updateTable} />
                 <br /><br />
-                <Table tableData={this.state.tableData} />
+                <TableContainer tableData={this.state.tableData} />
             </div>
         );
     }

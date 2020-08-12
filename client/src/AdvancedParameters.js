@@ -24,22 +24,13 @@ export class AdvancedParameters extends React.Component {
             selectedOption: 'either'
         };
 
-        this.iterateCheckboxArray = this.iterateCheckboxArray.bind(this);
-        this.iterateRadioArray = this.iterateRadioArray.bind(this);
-        this.onClicked = this.onClicked.bind(this);
-        this.onChecked = this.onChecked.bind(this);
+        this.createCheckboxsFromArray = this.createCheckboxsFromArray.bind(this);
+        this.createRadioButtonsFromArray = this.createRadioButtonsFromArray.bind(this);
+        this.handleChecked = this.handleChecked.bind(this);
+        this.handleClicked = this.handleClicked.bind(this);
     }
 
-    onClicked() {
-        this.setState(state => ({ isOpened: !state.isOpened }));
-    }
-
-    onChecked(event) {
-        this.setState({ selectedOption: event.target.value });
-        this.props.onRadioChange(event);
-    }
-
-    iterateCheckboxArray(checkboxArray) {
+    createCheckboxsFromArray(checkboxArray) {
         return checkboxArray.map(element => {
             return (
                 <label className="checkbox" key={element.display}>
@@ -54,7 +45,7 @@ export class AdvancedParameters extends React.Component {
         });
     }
 
-    iterateRadioArray(radioArray) {
+    createRadioButtonsFromArray(radioArray) {
         return radioArray.map(element => {
             return (
                 <label className="checkbox" key={element.display}>
@@ -62,7 +53,7 @@ export class AdvancedParameters extends React.Component {
                         type="radio"
                         value={element.value}
                         checked={this.state.selectedOption === element.value}
-                        onChange={this.onChecked}
+                        onChange={this.handleChecked}
                     />
                     {element.display}
                 </label>
@@ -70,19 +61,28 @@ export class AdvancedParameters extends React.Component {
         });
     }
 
+    handleChecked(event) {
+        this.setState({ selectedOption: event.target.value });
+        this.props.onRadioChange(event);
+    }
+
+    handleClicked() {
+        this.setState(state => ({ isOpened: !state.isOpened }));
+    }
+
     render() {
         return (
             <div>
                 <div className="config">
-                    <button className={this.state.isOpened ? "collapsible active" : "collapsible"} onClick={this.onClicked}>&nbsp;&nbsp;Advanced Parameters</button>
+                    <button className={this.state.isOpened ? "collapsible active" : "collapsible"} onClick={this.handleClicked}>&nbsp;&nbsp;Advanced Parameters</button>
                 </div>
                 <Collapse isOpened={this.state.isOpened}>
                     <div className="blob">
                         <h4>Spell Resistance:</h4>
-                        {this.iterateRadioArray(spellResistance)}
+                        {this.createRadioButtonsFromArray(spellResistance)}
                         <br />
                         <h4>Saves:</h4>
-                        {this.iterateCheckboxArray(saves)}
+                        {this.createCheckboxsFromArray(saves)}
                     </div>
                 </Collapse>
             </div>

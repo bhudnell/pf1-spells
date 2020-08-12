@@ -11,22 +11,10 @@ export class SearchParametersContainer extends React.Component {
         this.state = {};
 
         this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
-        this.handleTextChange = this.handleTextChange.bind(this);
         this.handleRadioChange = this.handleRadioChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleTextChange = this.handleTextChange.bind(this);
         this.isStateEmpty = this.isStateEmpty.bind(this);
-    }
-
-    handleCheckboxChange(event) {
-        this.setState({ [event.target.value]: event.target.checked });
-    }
-
-    handleTextChange(event) {
-        this.setState({ searchString: event.target.value });
-    }
-
-    handleRadioChange(event) {
-        this.setState({ spellResistance: event.target.value });
     }
 
     isStateEmpty() {
@@ -43,6 +31,18 @@ export class SearchParametersContainer extends React.Component {
             }
         }
         return true;
+    }
+
+    handleCheckboxChange(event) {
+        this.setState({ [event.target.value]: event.target.checked });
+    }
+
+    handleTextChange(event) {
+        this.setState({ searchString: event.target.value });
+    }
+
+    handleRadioChange(event) {
+        this.setState({ spellResistance: event.target.value });
     }
 
     handleSubmit(event) {

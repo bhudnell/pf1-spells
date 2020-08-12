@@ -23,7 +23,7 @@ const classTypes = [
   "ranger",
   "shaman",
   "skald",
-  "sorc",
+  "sor",
   "spiritualist",
   "summoner",
   "summoner_unchained",
@@ -70,7 +70,7 @@ exports.processQuery = url => {
     spellLevels: []
   };
 
-  url.searchParams.forEach((value, key) => {  
+  url.searchParams.forEach((value, key) => {
     if (key === 'searchString' && value.length > 0) { // text user is searching for
       processObject.searchString = value;
     }
@@ -108,7 +108,7 @@ exports.createSQLParameters = queryObject => {
     }
     return true;
   }
-  
+
   // if the queryObject is empty, return
   if (isObjectEmpty(queryObject)) {
     return '';
@@ -120,7 +120,7 @@ exports.createSQLParameters = queryObject => {
   // search string
   if (queryObject.searchString.length > 0) {
     SQLParams += ` spell_name LIKE '%${queryObject.searchString}%'`;
-    
+
     firstCondition = false;
   }
 
@@ -142,7 +142,7 @@ exports.createSQLParameters = queryObject => {
 
     SQLParams += ' (';
     let firstSave = true;
-        
+
     queryObject.saves.forEach(save => {
       if (!firstSave) {
         SQLParams += ' OR';
@@ -166,7 +166,7 @@ exports.createSQLParameters = queryObject => {
     if (queryObject.spellLevels.length === 0) { // only classes
       SQLParams += ' (';
       let firstClass = true;
-        
+
       queryObject.classes.forEach(myClass => {
         if (!firstClass) {
           SQLParams += ' OR';
@@ -177,11 +177,11 @@ exports.createSQLParameters = queryObject => {
       });
 
       SQLParams += ')';
-    }    
+    }
     else if (queryObject.classes.length === 0) { // only spell levels
       SQLParams += ' (';
       let firstLevel = true;
-        
+
       queryObject.spellLevels.forEach(spellLevel => {
         if (!firstLevel) {
           SQLParams += ' OR';
@@ -196,7 +196,7 @@ exports.createSQLParameters = queryObject => {
     else { // both classes and spell levels
       SQLParams += ' (';
       let firstParam = true;
-        
+
       queryObject.classes.forEach(myClass => {
         if (!firstParam) {
           SQLParams += ' OR';
@@ -221,6 +221,6 @@ exports.createSQLParameters = queryObject => {
       SQLParams += ')';
     }
   }
-  
+
   return SQLParams;
 }

@@ -14,7 +14,7 @@ const classTypes = [
   "inquisitor",
   "investigator",
   "magus",
-  "spell_medium",
+  "medium",
   "mesmerist",
   "occultist",
   "oracle",
@@ -23,12 +23,12 @@ const classTypes = [
   "ranger",
   "shaman",
   "skald",
-  "sor",
+  "sorcerer",
   "spiritualist",
   "summoner",
   "summoner_unchained",
   "witch",
-  "wiz"
+  "wizard"
 ];
 
 const saveTypes = [
@@ -75,14 +75,29 @@ exports.processQuery = url => {
       processObject.searchString = value;
     }
     else if (key === 'spellResistance' && value.length > 0) { // spell resistance (yes, no, either)
-      if (value === 'yes' || value === 'no') {
-        processObject.spellResistance = value;
+      if (value === 'true') {
+        processObject.spellResistance = 'yes';
+      }
+      else if (value === 'false') {
+        processObject.spellResistance = 'no';
       }
     }
     else if (value === 'true') // only accept true values for now
     {
       if (classTypes.includes(key)) { // this is a class type parameter
-        const newKey = key === 'arcanist' ? 'wiz' : key; // arcanist is treated the same as wizard in the database
+        let newKey = key;
+        if (key === 'arcanist') {
+          newKey = 'wiz';
+        } // arcanist is treated the same as wizard in the database
+        else if (key === 'wizard') {
+          newKey = 'wiz'; // rename to match database names
+        }
+        else if (key === 'sorcerer') {
+          newKey = 'sor'; // rename to match database names
+        }
+        else if (key === 'medium') {
+          newKey = 'spell_medium'; // rename to match database names
+        }
         processObject.classes.push(newKey);
       }
       else if (saveTypes.includes(key)) { // this is a save type parameter

@@ -13,7 +13,7 @@ const classes = [
     { value: "inquisitor", display: "Inquisitor" }, // break
     { value: "investigator", display: "Investigator" },
     { value: "magus", display: "Magus" },
-    { value: "spell_medium", display: "Medium" },
+    { value: "medium", display: "Medium" },
     { value: "mesmerist", display: "Mesmerist" },
     { value: "occultist", display: "Occultist" },
     { value: "oracle", display: "Oracle" },
@@ -22,11 +22,11 @@ const classes = [
     { value: "ranger", display: "Ranger" }, // break
     { value: "shaman", display: "Shaman" },
     { value: "skald", display: "Skald" },
-    { value: "sor", display: "Sorcerer" },
+    { value: "sorcerer", display: "Sorcerer" },
     { value: "spiritualist", display: "Spiritualist" },
     { value: "summoner", display: "Summoner" },
     { value: "witch", display: "Witch" },
-    { value: "wiz", display: "Wizard" },
+    { value: "wizard", display: "Wizard" },
     { value: "summoner_unchained", display: "Summoner (Unchained)" }
 ];
 

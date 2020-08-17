@@ -10,8 +10,8 @@ const saves = [
 ];
 
 const spellResistance = [
-    { value: "yes", display: "Yes" },
-    { value: "no", display: "No" },
+    { value: "true", display: "Yes" },
+    { value: "false", display: "No" },
     { value: "either", display: "Either" }
 ];
 

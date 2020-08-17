@@ -1,71 +1,151 @@
-# pf1-spells
+**Spell Search**
+----
+  Fetches a JSON object of all the spells in Pathfinder 1st Edition
 
-## API
-#### pf1-spells.herokuapp.com/api/spellsearch?
-###### Parameters
-<details>
-  <summary>Class Names: set to true if you want to search for that class's spells</summary>
-  
-  - alchemist  
-  - antipaladin
-  - arcanist
-  - bard
-  - bloodrager
-  - cleric
-  - druid
-  - hunter
-  - inquisitor
-  - investigator
-  - magus
-  - spell_medium
-  - mesmerist
-  - occultist
-  - oracle
-  - paladin
-  - psychic
-  - ranger
-  - shaman
-  - skald
-  - sor
-  - spiritualist
-  - summoner
-  - summoner_unchained
-  - witch
-  - wiz
-</details>
+* **URL**
 
-<details>
-  <summary>Saving Throw Types: set to true if you want to search for spells that target that saving throw</summary>
-  
-  - fortitude
-  - reflex
-  - will
-  - none
-</details>
+  /api/spellSearch
 
-<details>
-  <summary>Spell Levels: set to true if you want to search for spells of that level</summary>
+* **Method**
   
-  - 0th
-  - 1st
-  - 2nd
-  - 3rd
-  - 4th
-  - 5th
-  - 6th
-  - 7th
-  - 8th
-  - 9th
-</details>
+  `GET`
+  
+* **URL Params**
 
-<details>
-  <summary>Spell Name: search of a full or partial spell name</summary>
+  **Optional**
+ 
+  * `searchString=[alphanumeric]`
+   
+  * `spellResistance=[boolean]`
+   
+  * <details>
+    <summary>Class filters</summary><br>
+      
+    `alchemist=[true]`
+   
+    `antipaladin=[true]`
+   
+    `arcanist=[true]`
+   
+    `bard=[true]`
+   
+    `bloodrager=[true]`
+   
+    `cleric=[true]`
+   
+    `druid=[true]`
+   
+    `hunter=[true]`
+   
+    `inquisitor=[true]`
+   
+    `investigator=[true]`
+   
+    `magus=[true]`
+   
+    `medium=[true]`
+   
+    `mesmerist=[true]`
+   
+    `occultist=[true]`
+   
+    `oracle=[true]`
+   
+    `paladin=[true]`
+   
+    `psychic=[true]`
+   
+    `ranger=[true]`
+   
+    `shaman=[true]`
+   
+    `skald=[true]`
+   
+    `sorcerer=[true]`
+   
+    `spiritualist=[true]`
+   
+    `summoner=[true]`
+   
+    `summoner_unchained=[true]`
+   
+    `witch=[true]`
+   
+    `wizard=[true]`
+  </details>
   
-  - searchString
+  * <details>
+    <summary>Saving throw filters</summary><br>
+  
+    `fortitude=[true]`
+   
+    `reflex=[true]`
+   
+    `will=[true]`
+   
+    `none=[true]`
+  </details>
+   
+  * <details>
+    <summary>Spell level filters</summary><br>
+      
+    `0th=[true]`
+   
+    `1st=[true]`
+   
+    `2nd=[true]`
+    
+    `3rd=[true]`
+   
+    `4th=[true]`
+   
+    `5th=[true]`
+   
+    `6th=[true]`
+   
+    `7th=[true]`
+   
+    `8th=[true]`
+   
+    `9th=[true]`
   </details>
 
-<details>
-  <summary>Spell Resistance: set to yes to search for spells with spell resistance, no for spells without</summary>
+* **Success Response:**
   
-  - spellResistance
-</details>
+  * **Code:** TODO <br />
+    **Content:** 
+    ```
+    [
+      {
+        "spell_name":"Spell Name",
+        "description_formatted":"HTML formatted spell description",
+        "short_description":"Short, one-line description of the spell. May be null",
+        "spell_level":"Spell level for each class that can cast it. ex: cleric 2, sorcerer/wizard 1",
+        "saving_throw":"Saving throw for the spell. May be null",
+        "spell_resistance":"If the spell is affected by spell resistance. May be null"
+      },
+      ...
+    ]
+    ```
+ 
+* **Error Response:**
+
+  * **Code:** TODO <br />
+    **Content:** `TODO`
+
+  OR
+
+  * **Code:** TODO <br />
+    **Content:** `TODO`
+
+* **Sample Call:**
+
+  Search for 5th level wizard or cleric spells containing "magic" that targets a will save and doesnt have spell resistance:
+
+  `api/spellsearch?searchString=warrior&wizard=true&cleric=true&5th=true&spellResistance=false&will=true`
+  
+  returns one spell: Mantle of the Magic Warriors 
+
+* **Notes:**
+
+  Currently class, saving throw, and spell level filters can only be set to true. False values will be ignored. 

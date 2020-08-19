@@ -21,9 +21,9 @@ export class Main extends React.Component {
     render() {
         return (
             <div>
+                <h1 className="parameters">Pathfinder 1E Spell Search</h1>
                 <br />
                 <SearchParametersContainer onUpdate={this.updateTable} />
-                <br /><br />
                 <TableContainer tableData={this.state.tableData} />
             </div>
         );

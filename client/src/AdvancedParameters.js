@@ -23,39 +23,43 @@ export class AdvancedParameters extends React.Component {
             selectedOption: 'either'
         };
 
-        this.createCheckboxsFromArray = this.createCheckboxsFromArray.bind(this);
-        this.createRadioButtonsFromArray = this.createRadioButtonsFromArray.bind(this);
+        this.createCheckboxRow = this.createCheckboxRow.bind(this);
+        this.createRadioButtonRow = this.createRadioButtonRow.bind(this);
         this.handleChecked = this.handleChecked.bind(this);
         this.handleClicked = this.handleClicked.bind(this);
     }
 
-    createCheckboxsFromArray(checkboxArray) {
+    createCheckboxRow(checkboxArray) {
         return checkboxArray.map(element => {
             return (
-                <label className="checkbox" key={element.display}>
-                    <input
-                        type="checkbox"
-                        value={element.value}
-                        onChange={this.props.onCheckboxChange}
-                    />
-                    {element.display}
-                </label>
+                <td key={element.display}>
+                    <label>
+                        <input
+                            type="checkbox"
+                            value={element.value}
+                            onChange={this.props.onCheckboxChange}
+                        />
+                        {element.display}
+                    </label>
+                </td>
             );
         });
     }
 
-    createRadioButtonsFromArray(radioArray) {
+    createRadioButtonRow(radioArray) {
         return radioArray.map(element => {
             return (
-                <label className="checkbox" key={element.display}>
-                    <input
-                        type="radio"
-                        value={element.value}
-                        checked={this.state.selectedOption === element.value}
-                        onChange={this.handleChecked}
-                    />
-                    {element.display}
-                </label>
+                <td key={element.display}>
+                    <label>
+                        <input
+                            type="radio"
+                            value={element.value}
+                            checked={this.state.selectedOption === element.value}
+                            onChange={this.handleChecked}
+                        />
+                        {element.display}
+                    </label>
+                </td>
             );
         });
     }
@@ -72,15 +76,24 @@ export class AdvancedParameters extends React.Component {
     render() {
         return (
             <div>
-                <div className="config">
-                    <button className={this.state.isOpened ? "collapsible active" : "collapsible"} onClick={this.handleClicked}>&nbsp;&nbsp;Advanced Parameters</button>
-                </div>
+                <button className={this.state.isOpened ? "collapsible active" : "collapsible"} onClick={this.handleClicked}>&nbsp;&nbsp;Advanced Parameters</button>
                 <div className={this.state.isOpened ? "" : "hidden"}>
                     <h4>Spell Resistance:</h4>
-                    {this.createRadioButtonsFromArray(spellResistance)}
-                    <br />
+                    <table>
+                        <tbody>
+                            <tr>
+                                {this.createRadioButtonRow(spellResistance)}
+                            </tr>
+                        </tbody>
+                    </table>
                     <h4>Saves:</h4>
-                    {this.createCheckboxsFromArray(saves)}
+                    <table>
+                        <tbody>
+                            <tr>
+                                {this.createCheckboxRow(saves)}
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         );

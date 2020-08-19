@@ -64,7 +64,7 @@ export const BasicParameters = props => {
             <input id="searchText" type="text" onChange={props.onTextChange}/>
             <input type="submit" value="Search"/>
             <br />
-            <h4 className="parameterLabel">Class:</h4>
+            <h4>Class:</h4>
             <table>
                 <tbody>
                     <tr>
@@ -78,7 +78,7 @@ export const BasicParameters = props => {
                     </tr>
                 </tbody>
             </table>
-            <h4 className="parameterLabel">Spell level:</h4>
+            <h4>Spell level:</h4>
             <table>
                 <tbody>
                     <tr>

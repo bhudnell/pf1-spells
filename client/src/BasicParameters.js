@@ -65,7 +65,7 @@ export const BasicParameters = props => {
             <input type="submit" value="Search"/>
             <br />
             <h4 className="parameterLabel">Class:</h4>
-            <table className="parameters">
+            <table>
                 <tbody>
                     <tr>
                         {createTableRow(classes.slice(0, 8), props.onCheckboxChange)}
@@ -79,7 +79,7 @@ export const BasicParameters = props => {
                 </tbody>
             </table>
             <h4 className="parameterLabel">Spell level:</h4>
-            <table className="parameters">
+            <table>
                 <tbody>
                     <tr>
                         {createTableRow(spellLevel, props.onCheckboxChange)}

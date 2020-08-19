@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Collapse from 'react-collapse';
 
 const saves = [
     { value: "fortitude", display: "Fortitude" },
@@ -76,15 +75,13 @@ export class AdvancedParameters extends React.Component {
                 <div className="config">
                     <button className={this.state.isOpened ? "collapsible active" : "collapsible"} onClick={this.handleClicked}>&nbsp;&nbsp;Advanced Parameters</button>
                 </div>
-                <Collapse isOpened={this.state.isOpened}>
-                    <div className="blob">
-                        <h4>Spell Resistance:</h4>
-                        {this.createRadioButtonsFromArray(spellResistance)}
-                        <br />
-                        <h4>Saves:</h4>
-                        {this.createCheckboxsFromArray(saves)}
-                    </div>
-                </Collapse>
+                <div className={this.state.isOpened ? "" : "hidden"}>
+                    <h4>Spell Resistance:</h4>
+                    {this.createRadioButtonsFromArray(spellResistance)}
+                    <br />
+                    <h4>Saves:</h4>
+                    {this.createCheckboxsFromArray(saves)}
+                </div>
             </div>
         );
     }

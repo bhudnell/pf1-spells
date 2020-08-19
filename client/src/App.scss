@@ -1,6 +1,14 @@
 /*.App {
-  text-align: center;
+  // TODO site-wide styles
 }*/
+
+.parameters {
+  margin: 0 25% 0;
+}
+
+.results {
+  margin: 0 10% 0;
+}
 
 label.checkbox {
   margin-right: 10px;
@@ -8,13 +16,11 @@ label.checkbox {
 
 h4.parameterLabel {
   text-align: left;
-  margin-left: 25%;
   margin-bottom: 10px;
 }
 
 #searchText {
-  width: 30%;
-  margin-left: 25%;
+  width: 50%;
 }
 
 th.bordered, td.bordered {
@@ -49,7 +55,7 @@ td.expand {
   padding: 15px;
 }
 
-tr.hidden {
+.hidden {
   display: none;
 }
 
@@ -57,10 +63,6 @@ tr.hidden {
   max-height: 800px;
   overflow-y: auto;
   margin-bottom: 50px;
-}
-
-table.parameters {
-  margin-left: 25%;
 }
 
 th {
@@ -71,16 +73,11 @@ th, td {
   text-align: left;
   vertical-align: middle;
   padding: 5px;
+  width: auto;
 }
 
 .config {
-  margin-left: 25%;
   text-align: left;
-}
-
-.results {
-  margin-left: 10%;
-  margin-right: 10%;
 }
 
 .descendingSort:after {
@@ -109,15 +106,3 @@ th, td {
 .active:after {
   content: "\FF0D"; /* Unicode character for "minus" sign (-) */
 }
-
-.ReactCollapse--collapse {
-  transition: height 500ms;
-  margin-left: 25%;
-  margin-right: 25%;
-}
-
-/*
-.ReactCollapse--content {
-
-}
-*/

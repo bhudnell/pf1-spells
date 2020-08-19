@@ -74,7 +74,7 @@ export class SearchParametersContainer extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="parameters">
                 <BasicParameters
                     onCheckboxChange={this.handleCheckboxChange}
                     onSubmit={this.handleSubmit}

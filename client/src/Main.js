@@ -21,10 +21,18 @@ export class Main extends React.Component {
     render() {
         return (
             <div>
-                <h1 className="parameters">Pathfinder 1E Spell Search</h1>
-                <br />
-                <SearchParametersContainer onUpdate={this.updateTable} />
-                <TableContainer tableData={this.state.tableData} />
+                <div className="content">
+                    <header>
+                        <h1>Pathfinder 1E Spell Search</h1>
+                    </header>
+                    <br />
+                    <SearchParametersContainer onUpdate={this.updateTable} />
+                    <TableContainer tableData={this.state.tableData} />
+                    <div className="push"></div>
+                </div>
+                <footer>
+                    <h6>Designed by Brendon Hudnell. 2020</h6>
+                </footer>
             </div>
         );
     }

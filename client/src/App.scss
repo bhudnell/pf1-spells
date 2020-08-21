@@ -1,6 +1,51 @@
-/*.App {
-  // TODO site-wide styles
-}*/
+:root {
+  --mainColor: lightgrey;
+}
+
+.App {
+  background: var(--mainColor);
+}
+
+html > body > #root > div {
+  height: 100%; // todo make it so the footer is at the bottom of the page always. I think the content needs to expand to at least fill the page
+}
+
+header {
+  margin: 0;
+  padding: .67em 0 .67em 25%;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    )
+    var(--mainColor);
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  flex-shrink: 0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    )
+    var(--mainColor);
+}
+
+h1,
+h6 {
+  margin: 0;
+}
+
+.content {
+  flex: 1 0 auto;
+}
 
 .parameters {
   margin-left: 25%;
@@ -14,7 +59,8 @@
   width: 50%;
 }
 
-th.bordered, td.bordered {
+th.bordered,
+td.bordered {
   border-bottom: 1px solid black;
   border-right: 1px solid black;
 }
@@ -28,7 +74,13 @@ th.bordered {
   border-top: 1px solid black;
   position: sticky;
   top: 0;
-  background-color: white;
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.25),
+      rgba(0, 0, 0, 0.25)
+    )
+    var(--mainColor);
   cursor: pointer;
 }
 
@@ -60,7 +112,8 @@ th {
   height: 30px;
 }
 
-th, td {
+th,
+td {
   text-align: left;
   vertical-align: middle;
   padding: 5px;
@@ -79,7 +132,7 @@ th, td {
   vertical-align: middle;
   text-align: left;
   cursor: pointer;
-  background-color: white;
+  background-color: var(--mainColor);
   border: none;
   outline: none;
   font-size: 15px;

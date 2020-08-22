@@ -2,17 +2,29 @@
   --mainColor: lightgrey;
 }
 
-.App {
-  background: var(--mainColor);
+:root[theme='dark'] {
+  --mainColor: darkgrey;
 }
 
-html > body > #root > div {
-  height: 100%; // todo make it so the footer is at the bottom of the page always. I think the content needs to expand to at least fill the page
+.App {
+  background: var(--mainColor);
+  display: flex;
+  flex-direction: column;
+}
+
+html {
+  height: 100vh;
+}
+
+body,
+#root,
+.App {
+  min-height: 100vh;
 }
 
 header {
   margin: 0;
-  padding: .67em 0 .67em 25%;
+  padding: .67em 0 .67em 10%;
   background:
     linear-gradient(
       to top,
@@ -20,11 +32,6 @@ header {
       rgba(0, 0, 0, 0.25)
     )
     var(--mainColor);
-}
-
-body {
-  display: flex;
-  flex-direction: column;
 }
 
 footer {
@@ -145,4 +152,59 @@ td {
 
 .active:after {
   content: "\FF0D"; /* Unicode character for "minus" sign (-) */
+}
+
+.themeSwitchInput,
+.themeSwitchLabel {
+	position: absolute;
+    right: 30px;
+    top: 10px;
+}
+
+.themeSwitchInput {
+	opacity: 0;
+}
+
+// slider container
+.themeSwitchLabel {
+	width: 60px;
+	height: 34px;
+	border-radius: 34px;
+	text-align: center;
+	background-color: slateGray;
+
+    // slider circle
+	span {
+		position: absolute;
+		top: calc(100% + 10px);
+		left: 0;
+		width: 100%;
+	}
+
+    span::after {
+		position: absolute;
+		bottom: calc(100% + 15px);
+		left: 5px;
+		width: 24px;
+		height: 24px;
+		content: '';
+		border-radius: 50%;
+		background-color: lightBlue;
+	}
+}
+
+.themeLabel {
+    position: absolute;
+    right: 10px;
+    top: calc(10px + 34px);
+}
+
+.themeSwitchInput:checked ~ .themeSwitchLabel {
+		background-color: lightSlateGray;
+
+	span::after {
+		-webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+	}
 }

@@ -3,7 +3,7 @@ const mysql = require('mysql');
 require('dotenv').config();
 
 const classTypes = [
-  "alchemist" ,
+  "alchemist",
   "antipaladin",
   "arcanist",
   "bard",
@@ -83,8 +83,7 @@ exports.processQuery = url => {
         processObject.spellResistance = 'no';
       }
     }
-    else if (value === 'true') // only accept true values for now
-    {
+    else if (value === 'true') { // only accept true values for now
       if (classTypes.includes(key)) { // this is a class type parameter
         let newKey = key;
         if (key === 'arcanist') {
@@ -151,7 +150,7 @@ exports.createSQLParameters = queryObject => {
   }
 
   // saves
-  if(queryObject.saves.length > 0) {
+  if (queryObject.saves.length > 0) {
     if (!firstCondition) {
       SQLParams += ' AND ';
     }

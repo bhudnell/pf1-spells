@@ -6,13 +6,19 @@ import { Main } from './Main';
 const changeTheme = () => {
   if (document.documentElement.hasAttribute('theme')) {
     document.documentElement.removeAttribute('theme');
+    localStorage.removeItem('theme');
   }
   else {
     document.documentElement.setAttribute('theme', 'dark');
+    localStorage.setItem('theme', 'dark');
   }
 }
 
 function App() {
+  if (localStorage.getItem('theme') === 'dark') {
+    document.documentElement.setAttribute('theme', 'dark');
+  }
+
   return (
     <div className="App">
       <div className="content">

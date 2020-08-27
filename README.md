@@ -14,6 +14,4 @@ Small app for hosting the Pathfinder 1st Edition spells search engine
 - `cd client`
 - `npm start` this will start the web page
 
-**Web API**
-
-[available endpoints](./doc/API.md)
+[**Web API**](./doc/API.md)

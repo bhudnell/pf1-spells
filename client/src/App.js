@@ -23,14 +23,12 @@ function App() {
     <div className="App">
       <div className="content">
         <header>
-          <br />
           <h1>Pathfinder 1E Spell Search</h1>
           <input type="checkbox" id="themeSwitch" className="themeSwitchInput" onClick={changeTheme} />
-          <label htmlFor="themeSwitch" className="themeSwitchLabel">
+          <label htmlFor="themeSwitch" className="themeSwitchLabel tooltip">
             <span />
           </label>
-          <span className="themeLabel">Toggle theme</span>
-          <br />
+          <span className="tooltipText">Toggle theme</span>
         </header>
         <br />
         <Main />

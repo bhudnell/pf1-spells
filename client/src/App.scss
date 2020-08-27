@@ -4,10 +4,12 @@
   --color-secondary: #03dac6;
   --color-secondary-variant: #018786;
   --color-background: #ffffff;
+  --color-surface: #ffffff;
   --color-error: #b00020;
   --color-on-primary: #ffffff;
   --color-on-secondary: #000000;
   --color-on-background: #000000;
+  --color-on-surface: #000000;
   --color-on-error: #ffffff;
 }
 
@@ -17,10 +19,12 @@
   --color-secondary: #03dac6;
   --color-secondary-variant: #03dac6;
   --color-background: #121212;
+  --color-surface: #242526;
   --color-error: #cf6679;
   --color-on-primary: #000000;
   --color-on-secondary: #000000;
   --color-on-background: #ffffff;
+  --color-on-surface: #ffffff;
   --color-on-error: #000000;
 }
 
@@ -45,12 +49,6 @@ header {
   margin: 0;
   padding: 0.67em 0 0.67em 10%;
   background: var(--color-primary);
-  /*linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.25)
-    )
-    var(--color-background);*/
 
   span {
     color: var(--color-on-primary);
@@ -60,12 +58,6 @@ header {
 footer {
   flex-shrink: 0;
   background: var(--color-primary);
-  /*linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.25)
-    )
-    var(--color-background);*/
 }
 
 h1,
@@ -102,13 +94,14 @@ th.bordered,
 td.bordered {
   border-bottom: 1px solid;
   border-right: 1px solid;
-  border-color: var(--color-on-background);
 }
 
 table.bordered {
   border-spacing: 0;
   border-left: 1px solid;
-  border-color: var(--color-on-background);
+  color: var(--color-on-surface);
+  border-color: var(--color-on-surface);
+  background-color: var(--color-surface);
 }
 
 th.bordered {
@@ -116,12 +109,6 @@ th.bordered {
   position: sticky;
   top: 0;
   background: var(--color-primary);
-  /*linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.25),
-      rgba(0, 0, 0, 0.25)
-    )
-    var(--color-background);*/
   cursor: pointer;
   color: var(--color-on-primary);
   border-color: var(--color-on-primary);
@@ -138,7 +125,6 @@ tr.bordered {
 td.expand {
   border-right: 1px solid;
   border-bottom: 1px solid;
-  border-color: var(--color-on-background);
   padding: 15px;
 }
 
@@ -195,8 +181,8 @@ td {
 .themeSwitchInput,
 .themeSwitchLabel {
   position: absolute;
-  right: 30px;
-  top: 10px;
+  right: 14px;
+  top: 14px;
 }
 
 .themeSwitchInput {
@@ -231,12 +217,6 @@ td {
   }
 }
 
-.themeLabel {
-  position: absolute;
-  right: 10px;
-  top: calc(10px + 34px);
-}
-
 .themeSwitchInput:checked ~ .themeSwitchLabel {
   background-color: var(--color-background);
 
@@ -245,4 +225,17 @@ td {
     -ms-transform: translateX(26px);
     transform: translateX(26px);
   }
+}
+
+.tooltip + .tooltipText {
+  visibility: hidden;
+  width: 120px;
+  text-align: right;
+  position: absolute;
+  right: 78px;
+  top: 20px;
+}
+
+.tooltip:hover + .tooltipText {
+  visibility: visible;
 }

@@ -13,8 +13,8 @@ The database must contain a table named `spells`
   - `text`: `spell_description`, `full_text`
   - `int`: `adept`, `SLA_Level`, `id`, `material_costs`
 
-a table with all the optional columns can be created with:
 <details>
+  <summary>a table with all the optional columns can be created with:</summary>
     
 ```
 CREATE TABLE `spells` (

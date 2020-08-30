@@ -116,4 +116,4 @@ CREATE TABLE `spells` (
 ```
 </details>
 
-The data for the databse was taken from [Pathfinder Community speels database](http://home.pathfindercommunity.net/home/databases/spells) and missing values were added by hand
+The data for the databse was taken from [Pathfinder Community spells database](http://home.pathfindercommunity.net/home/databases/spells) and missing values were added by hand

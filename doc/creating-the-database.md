@@ -14,6 +14,8 @@ The database must contain a table named `spells`
   - `int`: `adept`, `SLA_Level`, `id`, `material_costs`
 
 a table with all the optional columns can be created with:
+<details>
+    
 ```
 CREATE TABLE `spells` (
   `spell_name` varchar(36) NOT NULL,
@@ -112,3 +114,6 @@ CREATE TABLE `spells` (
   PRIMARY KEY (`spell_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 ```
+</details>
+
+The data for the databse was taken from [Pathfinder Community speels database](http://home.pathfindercommunity.net/home/databases/spells) and missing values were added by hand

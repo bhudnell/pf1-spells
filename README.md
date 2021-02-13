@@ -1,4 +1,5 @@
 # pf1-spells
+## This has been deprecated in favor of [pf1-spells-v2](https://github.com/BrendonHudnell/pf1-spells-v2)
 Small app for hosting the Pathfinder 1st Edition spells search engine
 
 **To build:**
